@@ -6,4 +6,5 @@ import it.sal.disco.unimib.filmreviewer.customObj.MoviesResponse;
 
 public interface iMoviesRepository {
     MutableLiveData<MoviesResponse> getNewsTest();
+    MutableLiveData<MoviesResponse> getNewsMostPopular();
 }

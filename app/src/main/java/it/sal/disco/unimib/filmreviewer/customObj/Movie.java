@@ -1,12 +1,26 @@
 package it.sal.disco.unimib.filmreviewer.customObj;
 
 public class Movie {
+    private String id;
+    private int rank;
     private String title;
+    private String fullTitle;
+    private int year;
+    private String image;
+    private String crew;
+    private String imDbRating;
+    private String imDbRatingCount;
+
+
     private String desc;
 
     public Movie(String title, String desc) {
         this.title = title;
         this.desc = desc;
+    }
+
+    public int getYear() {
+        return year;
     }
 
     public String getTitle() {

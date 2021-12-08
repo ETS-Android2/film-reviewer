@@ -60,23 +60,21 @@ public class DiscoverFragment extends Fragment {
         countryNewsRecyclerView.setAdapter(RecyclerViewAdapter);
 
 
-
         //Observer for when View model change state
-        @SuppressLint("NotifyDataSetChanged") final Observer<MoviesResponse> observer = moviesResponse -> {
-            if (moviesResponse == null) {
+        @SuppressLint("NotifyDataSetChanged") Observer<MoviesResponse> observer = moviesResponse -> {
+            if (moviesResponse.getMoviesList() == null) {
                 Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
                         "Error moviesResponse",
                         Snackbar.LENGTH_LONG)
                         .show();
+            }else{
+                if (moviesResponse.getMoviesList() != null) {
+                    moviesList.addAll(moviesResponse.getMoviesList());
+                    RecyclerViewAdapter.notifyDataSetChanged();
+                }
             }
-            if (moviesResponse.getMoviesList() != null) {
-                moviesList.addAll(moviesResponse.getMoviesList());
-                RecyclerViewAdapter.notifyDataSetChanged();
-            }
-
         };
-
 
         mDiscoverViewModel.getNews().observe(getViewLifecycleOwner(), observer);
         return this_view;

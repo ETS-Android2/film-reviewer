@@ -61,9 +61,10 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
         public void bind(Movie movie){
             ((TextView) itemView.findViewById(R.id.tv_title))
                     .setText(movie.getTitle());
+            /*
             ((TextView) itemView.findViewById(R.id.tv_desc))
                     .setText(movie.getDesc());
-
+            */
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
