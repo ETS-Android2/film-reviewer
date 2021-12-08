@@ -70,6 +70,8 @@ public class DiscoverFragment extends Fragment {
                         .show();
             }else{
                 if (moviesResponse.getMoviesList() != null) {
+
+                    //aggiungere qua che ne aggiunge solo 20
                     moviesList.addAll(moviesResponse.getMoviesList());
                     RecyclerViewAdapter.notifyDataSetChanged();
                 }

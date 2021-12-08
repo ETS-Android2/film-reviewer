@@ -13,14 +13,41 @@ public class Movie {
 
 
     private String desc;
+    private String private_stars;
 
     public Movie(String title, String desc) {
         this.title = title;
         this.desc = desc;
     }
 
-    public int getYear() {
-        return year;
+    public Movie(String id, int rank, String title, String fullTitle, int year, String image, String crew, String imDbRating, String imDbRatingCount, String desc, String private_stars) {
+        this.id = id;
+        this.rank = rank;
+        this.title = title;
+        this.fullTitle = fullTitle;
+        this.year = year;
+        this.image = image;
+        this.crew = crew;
+        this.imDbRating = imDbRating;
+        this.imDbRatingCount = imDbRatingCount;
+        this.desc = desc;
+        this.private_stars = private_stars;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     public String getTitle() {
@@ -31,6 +58,54 @@ public class Movie {
         this.title = title;
     }
 
+    public String getFullTitle() {
+        return fullTitle;
+    }
+
+    public void setFullTitle(String fullTitle) {
+        this.fullTitle = fullTitle;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getCrew() {
+        return crew;
+    }
+
+    public void setCrew(String crew) {
+        this.crew = crew;
+    }
+
+    public String getImDbRating() {
+        return imDbRating;
+    }
+
+    public void setImDbRating(String imDbRating) {
+        this.imDbRating = imDbRating;
+    }
+
+    public String getImDbRatingCount() {
+        return imDbRatingCount;
+    }
+
+    public void setImDbRatingCount(String imDbRatingCount) {
+        this.imDbRatingCount = imDbRatingCount;
+    }
+
     public String getDesc() {
         return desc;
     }
@@ -39,11 +114,11 @@ public class Movie {
         this.desc = desc;
     }
 
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "title='" + title + '\'' +
-                ", desc='" + desc + '\'' +
-                '}';
+    public String getPrivate_stars() {
+        return private_stars;
+    }
+
+    public void setPrivate_stars(String private_stars) {
+        this.private_stars = private_stars;
     }
 }
