@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/collection_fragment"
+        android:icon="@drawable/ic_baseline_collections_24"
+        android:title="@string/collection" />
+    <item
+        android:id="@+id/bookmarks_fragment"
+        android:icon="@drawable/ic_baseline_star_24"
+        android:title="@string/bookmarks" />
+    <item
+        android:id="@+id/discover_fragment"
+        android:icon="@drawable/ic_baseline_movie_filter_24"
+        android:title="@string/discover" />
+    <item
+        android:id="@+id/search_fragment"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/search" />
+</menu>

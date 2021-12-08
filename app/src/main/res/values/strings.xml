@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FilmReviewer</string>
+
+
+    <string name="collection">Collection</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="discover">Discover</string>
+    <string name="search">Search</string>
+
+
+</resources>
