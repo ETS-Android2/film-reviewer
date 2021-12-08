@@ -19,7 +19,6 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
         void onItemClick(Movie movie);
     }
     private OnItemClickListener onItemClickListener;
-
     private List<Movie> mMoviesList;
 
     public MoviesRecyclerViewAdapterAPI(List<Movie> mMoviesList, OnItemClickListener OnItemClickListener){
@@ -35,7 +34,6 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
                 R.layout.movie_layout_api,
                 parent,
                 false);
-
         return new MoviesRecyclerViewHolderAPI(view1);
     }
 
@@ -53,7 +51,6 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
     }
 
     public class MoviesRecyclerViewHolderAPI extends RecyclerView.ViewHolder{
-
         public MoviesRecyclerViewHolderAPI(@NonNull View itemView) {
             super(itemView);
         }
@@ -61,16 +58,10 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
         public void bind(Movie movie){
             ((TextView) itemView.findViewById(R.id.tv_title))
                     .setText(movie.getTitle());
-            /*
             ((TextView) itemView.findViewById(R.id.tv_desc))
-                    .setText(movie.getDesc());
-            */
-            itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    onItemClickListener.onItemClick(movie);
-                }
-            });
+                    .setText(String.valueOf(movie.getYear()));
+
+            itemView.setOnClickListener(v -> onItemClickListener.onItemClick(movie));
         }
     }
 }

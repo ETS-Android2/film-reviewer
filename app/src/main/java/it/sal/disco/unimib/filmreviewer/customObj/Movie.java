@@ -121,4 +121,21 @@ public class Movie {
     public void setPrivate_stars(String private_stars) {
         this.private_stars = private_stars;
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id='" + id + '\'' +
+                ", rank=" + rank +
+                ", title='" + title + '\'' +
+                ", fullTitle='" + fullTitle + '\'' +
+                ", year=" + year +
+                ", image='" + image + '\'' +
+                ", crew='" + crew + '\'' +
+                ", imDbRating='" + imDbRating + '\'' +
+                ", imDbRatingCount='" + imDbRatingCount + '\'' +
+                ", desc='" + desc + '\'' +
+                ", private_stars='" + private_stars + '\'' +
+                '}';
+    }
 }

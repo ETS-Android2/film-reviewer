@@ -31,15 +31,12 @@ public class MoviesRepository implements iMoviesRepository{
         this.mLiveData = new MutableLiveData<>();
     }
 
-
     @Override
     public MutableLiveData<MoviesResponse> getNewsTest() {
-
         List<Movie> moviesList = new ArrayList<>();
         for(int i=0; i<20; i++){
             moviesList.add(new Movie("Title"+i, "Desc"+i));
         }
-
         mLiveData.postValue(new MoviesResponse(moviesList));
         return mLiveData;
     }
@@ -50,26 +47,23 @@ public class MoviesRepository implements iMoviesRepository{
                 addConverterFactory(GsonConverterFactory.create()).build();
         ApiService mApiService = retrofit.create(ApiService.class);
         Call<MoviesResponse> newsResponseCall = mApiService.getNews(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
-        Log.d("AAAA------1", mApiService.getNews(Constants.HEADLINES_COUNTRY, Constants.API_KEY).toString());
         newsResponseCall.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
                 Executors.newSingleThreadExecutor().execute(() -> {
-                    Log.d("AAAA", "onResponse - getNewsOnlineInDB");
-                    Log.d("AAAA------2", response.toString());
+                    Log.d("MoviesRepository", "onResponse - getNewsOnlineInDB");
+                    //Log.d("AAAA------2", response.toString());
                     if(response.body() != null){
                         List<Movie> newsList = response.body().getMoviesList();
-                        Log.d("AAAA------3", newsList.toString());
-
                         mLiveData.postValue(new MoviesResponse(newsList));
                     }else{
-                        Log.d("AAAA", "onResponse - getNewsOnlineInDB - ERROR response");
+                        Log.d("MoviesRepository", "onResponse - getNewsOnlineInDB - ERROR response");
                     }
                 });
             }
             @Override
             public void onFailure(@NonNull Call<MoviesResponse> call, @NonNull Throwable t) {
-                Log.d("AAAAA", "onFailure - getNewsOnlineInDB");
+                Log.d("MoviesRepository", "onFailure - getNewsOnlineInDB");
             }});
         return mLiveData;
     }

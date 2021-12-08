@@ -23,6 +23,7 @@ import it.sal.disco.unimib.filmreviewer.R;
 import it.sal.disco.unimib.filmreviewer.adapter.MoviesRecyclerViewAdapterAPI;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 import it.sal.disco.unimib.filmreviewer.customObj.MoviesResponse;
+import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
 
 public class DiscoverFragment extends Fragment {
@@ -40,8 +41,6 @@ public class DiscoverFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         this.moviesList = new ArrayList<>();
-
-        //Connection with ViewModel
         mDiscoverViewModel = new ViewModelProvider(requireActivity()).get(DiscoverViewModel.class);
     }
 
@@ -56,12 +55,14 @@ public class DiscoverFragment extends Fragment {
         RecyclerViewAdapter =
                 new MoviesRecyclerViewAdapterAPI(
                         this.moviesList,
-                        movie -> Log.d("DiscoverFragment", "Click RecycleView element " + movie));
+                        movie -> Log.d(
+                                "DiscoverFragment",
+                                "CLICKED RecycleView element " + movie.toString()));
         countryNewsRecyclerView.setAdapter(RecyclerViewAdapter);
 
-
         //Observer for when View model change state
-        @SuppressLint("NotifyDataSetChanged") Observer<MoviesResponse> observer = moviesResponse -> {
+        @SuppressLint("NotifyDataSetChanged")
+        Observer<MoviesResponse> observer = moviesResponse -> {
             if (moviesResponse.getMoviesList() == null) {
                 Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
@@ -70,14 +71,15 @@ public class DiscoverFragment extends Fragment {
                         .show();
             }else{
                 if (moviesResponse.getMoviesList() != null) {
-
-                    //aggiungere qua che ne aggiunge solo 20
-                    moviesList.addAll(moviesResponse.getMoviesList());
+                    moviesList.clear();
+                    for(int i=0; i<Constants.API_MAX_FOR_PAGE; i++){
+                        moviesList.add(moviesResponse.getMoviesList().get(i));
+                    }
+                    //moviesList.addAll(moviesResponse.getMoviesList());
                     RecyclerViewAdapter.notifyDataSetChanged();
                 }
             }
         };
-
         mDiscoverViewModel.getNews().observe(getViewLifecycleOwner(), observer);
         return this_view;
     }

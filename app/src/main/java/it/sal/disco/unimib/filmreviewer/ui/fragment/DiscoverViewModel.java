@@ -26,21 +26,10 @@ public class DiscoverViewModel extends AndroidViewModel {
         mIMoviesRepository = new MoviesRepository(application);
     }
 
-    /*
-    public MutableLiveData<NewsResponse> getNews(String country) {
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - Constants.LAST_TIME_UPDATE > Constants.TIME_TO_WAIT){
-            Constants.LAST_TIME_UPDATE = currentTime;
-            mNewsResponseLiveData = mINewsRepository.getNewsOnlineInDB(country);
-
-        }else{
-            mNewsResponseLiveData = mINewsRepository.fetchNews(country);
-        }
-        return mNewsResponseLiveData;
-    }*/
-
     public MutableLiveData<MoviesResponse> getNews() {
+
         //mMoviesResponseLiveData = mIMoviesRepository.getNewsTest();
+            //Need to be adapted to new Movie class before use
         mMoviesResponseLiveData = mIMoviesRepository.getNewsMostPopular();
 
         return mMoviesResponseLiveData;
