@@ -56,21 +56,20 @@ public class DiscoverFragment extends Fragment {
         RecyclerViewAdapter =
                 new MoviesRecyclerViewAdapterAPI(
                         this.moviesList,
-                        movie -> Log.d("DiscoverFragment", "Click RecycleView element " + movie.getTitle()));
+                        movie -> Log.d("DiscoverFragment", "Click RecycleView element " + movie));
         countryNewsRecyclerView.setAdapter(RecyclerViewAdapter);
 
 
 
         //Observer for when View model change state
         @SuppressLint("NotifyDataSetChanged") final Observer<MoviesResponse> observer = moviesResponse -> {
-            /*
-            if (moviesResponse.isError()) {
+            if (moviesResponse == null) {
                 Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
-                        newsResponse.getStatus(),
+                        "Error moviesResponse",
                         Snackbar.LENGTH_LONG)
                         .show();
-            }*/
+            }
             if (moviesResponse.getMoviesList() != null) {
                 moviesList.addAll(moviesResponse.getMoviesList());
                 RecyclerViewAdapter.notifyDataSetChanged();

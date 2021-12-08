@@ -24,4 +24,12 @@ public class Movie {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "title='" + title + '\'' +
+                ", desc='" + desc + '\'' +
+                '}';
+    }
 }
