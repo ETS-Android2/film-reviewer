@@ -51,6 +51,11 @@ public class DiscoverFragment extends Fragment {
 
         //RecyclerView
         RecyclerView countryNewsRecyclerView = this_view.findViewById(R.id.discover_recycler_view);
+        //Test-----------------
+        countryNewsRecyclerView.setHasFixedSize(true);
+        countryNewsRecyclerView.setItemViewCacheSize(35);
+        countryNewsRecyclerView.setDrawingCacheEnabled(true);
+        //FINE Test-----------------
         countryNewsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         RecyclerViewAdapter =
                 new MoviesRecyclerViewAdapterAPI(
@@ -59,6 +64,7 @@ public class DiscoverFragment extends Fragment {
                                 "DiscoverFragment",
                                 "CLICKED RecycleView element " + movie.toString()));
         countryNewsRecyclerView.setAdapter(RecyclerViewAdapter);
+
 
         //Observer for when View model change state
         @SuppressLint("NotifyDataSetChanged")

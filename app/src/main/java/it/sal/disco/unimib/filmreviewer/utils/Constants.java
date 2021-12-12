@@ -10,10 +10,10 @@ public class Constants {
     public final static String HEADLINES_COUNTRY_IT = "it";
     public final static String HEADLINES_COUNTRY_EN = "en";
 
-    //public final static String API_KEY = "k_613gh8jx";
-    public final static String API_KEY = "k_lkvlsrmu";
+    public final static String API_KEY = "k_613gh8jx";
+    //public final static String API_KEY = "k_lkvlsrmu";
     public final static String HEADLINES_APIKEY_PR = "apiKey";
 
 
-    public final static int API_MAX_FOR_PAGE = 35;
+    public final static int API_MAX_FOR_PAGE = 25;
 }

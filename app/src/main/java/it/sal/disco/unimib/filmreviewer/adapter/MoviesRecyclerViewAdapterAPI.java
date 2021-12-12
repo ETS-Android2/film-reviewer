@@ -1,8 +1,5 @@
 package it.sal.disco.unimib.filmreviewer.adapter;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.imageaware.ImageAware;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.squareup.picasso.Picasso;
 
-import java.net.URL;
 import java.util.List;
 
 import it.sal.disco.unimib.filmreviewer.R;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
-import it.sal.disco.unimib.filmreviewer.ui.activity.MainActivity;
-import retrofit2.http.Url;
 
 public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRecyclerViewAdapterAPI.MoviesRecyclerViewHolderAPI> {
 
@@ -32,7 +23,6 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
     }
     private OnItemClickListener onItemClickListener;
     private List<Movie> mMoviesList;
-    private ImageLoader imageLoader = ImageLoader.getInstance();
 
     public MoviesRecyclerViewAdapterAPI(List<Movie> mMoviesList, OnItemClickListener OnItemClickListener){
         this.mMoviesList = mMoviesList;
@@ -69,17 +59,16 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
         }
 
         public void bind(Movie movie){
-            imageLoader.loadImage(movie.getImage(), new SimpleImageLoadingListener() {
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    ((TextView) itemView.findViewById(R.id.tv_title))
-                            .setText(movie.getTitle());
-                    ((TextView) itemView.findViewById(R.id.tv_desc))
-                            .setText(String.valueOf(movie.getYear()));
+            //OLD1
+            ((TextView) itemView.findViewById(R.id.tv_title))
+                    .setText(movie.getTitle());
+            ((TextView) itemView.findViewById(R.id.tv_desc))
+                    .setText(String.valueOf(movie.getYear()));
 
-                    ((ImageView) itemView.findViewById(R.id.tv_imgv)).setImageBitmap(loadedImage);
-                }
-            });
+            //PICASSO - Image Loading
+            String imageUri = movie.getImage();
+            ImageView ivBasicImage = itemView.findViewById(R.id.tv_imgv);
+            Picasso.get().load(imageUri).into(ivBasicImage);
 
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(movie));
         }
