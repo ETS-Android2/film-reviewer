@@ -69,15 +69,14 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
         }
 
         public void bind(Movie movie){
-
-            ((TextView) itemView.findViewById(R.id.tv_title))
-                    .setText(movie.getTitle());
-            ((TextView) itemView.findViewById(R.id.tv_desc))
-                    .setText(String.valueOf(movie.getYear()));
-
             imageLoader.loadImage(movie.getImage(), new SimpleImageLoadingListener() {
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    ((TextView) itemView.findViewById(R.id.tv_title))
+                            .setText(movie.getTitle());
+                    ((TextView) itemView.findViewById(R.id.tv_desc))
+                            .setText(String.valueOf(movie.getYear()));
+
                     ((ImageView) itemView.findViewById(R.id.tv_imgv)).setImageBitmap(loadedImage);
                 }
             });
