@@ -8,6 +8,8 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import it.sal.disco.unimib.filmreviewer.R;
 
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Required for navigation between fragment
         NavHostFragment navHostFragment_news_act =
                 (NavHostFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.main_fragmentContainerView);
@@ -27,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.main_bottom_nav_view);
         NavigationUI
                 .setupWithNavController(bottomNavigView_news_act, navController_news_act);
+
+        //Required for imageLoader
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
 
     }
 }
