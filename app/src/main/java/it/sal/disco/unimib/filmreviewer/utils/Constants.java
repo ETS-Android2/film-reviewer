@@ -15,5 +15,5 @@ public class Constants {
     public final static String HEADLINES_APIKEY_PR = "apiKey";
 
 
-    public final static int API_MAX_FOR_PAGE = 25;
+    public final static int API_MAX_FOR_PAGE = 35;
 }

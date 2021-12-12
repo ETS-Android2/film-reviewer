@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import java.net.URL;
@@ -68,6 +69,7 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
         }
 
         public void bind(Movie movie){
+
             ((TextView) itemView.findViewById(R.id.tv_title))
                     .setText(movie.getTitle());
             ((TextView) itemView.findViewById(R.id.tv_desc))
@@ -76,8 +78,7 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
             imageLoader.loadImage(movie.getImage(), new SimpleImageLoadingListener() {
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    ImageView imv = itemView.findViewById(R.id.tv_imgv);
-                    imv.setImageBitmap(loadedImage);
+                    ((ImageView) itemView.findViewById(R.id.tv_imgv)).setImageBitmap(loadedImage);
                 }
             });
 
