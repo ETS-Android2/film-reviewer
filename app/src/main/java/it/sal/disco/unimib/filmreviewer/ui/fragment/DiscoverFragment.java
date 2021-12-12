@@ -52,6 +52,7 @@ public class DiscoverFragment extends Fragment {
         //RecyclerView
         RecyclerView countryNewsRecyclerView = this_view.findViewById(R.id.discover_recycler_view);
         //Test-----------------
+        //DA DISABILITARE UNA VOLTA ABILITATA CACHE SU DISCO DELLE IMMAGINI
         countryNewsRecyclerView.setHasFixedSize(true);
         countryNewsRecyclerView.setItemViewCacheSize(35);
         countryNewsRecyclerView.setDrawingCacheEnabled(true);

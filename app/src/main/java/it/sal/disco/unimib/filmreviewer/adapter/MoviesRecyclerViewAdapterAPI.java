@@ -69,6 +69,9 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
             String imageUri = movie.getImage();
             ImageView ivBasicImage = itemView.findViewById(R.id.tv_imgv);
             Picasso.get().load(imageUri).into(ivBasicImage);
+            //ricordarsi di rimuovere la cache e altre impostazioni della
+            //recycler view una volta aggiunta cache su disco delle immagini
+            //o se non rimuoverlo abilitarlo come impostazione dall utente
 
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(movie));
         }
