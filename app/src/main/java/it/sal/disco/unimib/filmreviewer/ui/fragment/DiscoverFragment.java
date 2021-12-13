@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -48,6 +50,22 @@ public class DiscoverFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View this_view = inflater.inflate(R.layout.fragment_discover, container, false);
+
+        //Spinner
+        Spinner mSpinnerDiscovery = this_view.findViewById(R.id.spinner_discover);
+        mSpinnerDiscovery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id){
+                //prefCountry = mSpinnerDiscovery.getSelectedItemPosition();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+
 
         //RecyclerView
         RecyclerView countryNewsRecyclerView = this_view.findViewById(R.id.discover_recycler_view);

@@ -5,7 +5,7 @@ public class Movie {
     private int rank;
     private String title;
     private String fullTitle;
-    private int year;
+    private String year;
     private String image;
     private String crew;
     private String imDbRating;
@@ -20,7 +20,7 @@ public class Movie {
         this.desc = desc;
     }
 
-    public Movie(String id, int rank, String title, String fullTitle, int year, String image, String crew, String imDbRating, String imDbRatingCount, String desc, String private_stars) {
+    public Movie(String id, int rank, String title, String fullTitle, String year, String image, String crew, String imDbRating, String imDbRatingCount, String desc, String private_stars) {
         this.id = id;
         this.rank = rank;
         this.title = title;
@@ -66,11 +66,11 @@ public class Movie {
         this.fullTitle = fullTitle;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

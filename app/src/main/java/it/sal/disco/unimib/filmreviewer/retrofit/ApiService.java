@@ -8,19 +8,58 @@ import retrofit2.http.Header;
 import retrofit2.http.Query;
 
 public interface ApiService {
-    @GET(Constants.HEADLINES)
-    Call<MoviesResponse> getNews(
-            @Header(Constants.HEADLINES_COUNTRY_PR) String country,
-            @Query(Constants.HEADLINES_APIKEY_PR) String apiKey);
+
+    //Call rep 1
+    @GET("MostPopularMovies")
+    Call<MoviesResponse> getMostPopularMovies(
+            @Header(Constants.HEADLINES_COUNTRY) String country,
+            @Query("apiKey") String apiKey);
 
 
-    //https://imdb-api.com/en/API/Keyword/k_613gh8jx/action-hero
-    /*
+    //Call rep 2,
     @GET("Keyword")
-    Call<MoviesResponse> getActionHeros(
-            @Header(Constants.HEADLINES_COUNTRY_PR) String country,
-            @Header("id") String "action-hero",
-            @Query(Constants.HEADLINES_APIKEY_PR) String apiKey);
+    Call<MoviesResponse> getByKeyword(
+            @Header(Constants.HEADLINES_COUNTRY) String country,
+            @Query("apiKey") String apiKey,
+            @Query("id") String query_value);
+            /*
+            * Use with:
+            *   dramas
+            *
+            */
 
-     */
+    //Call rep -
+    @GET("Top250Movies")
+    Call<MoviesResponse> getTop250(
+            @Header(Constants.HEADLINES_COUNTRY) String country,
+            @Query("apiKey") String apiKey);
+
+
+    //Call rep -
+    @GET("ComingSoon")
+    Call<MoviesResponse> getComingSoon(
+            @Header(Constants.HEADLINES_COUNTRY) String country,
+            @Query("apiKey") String apiKey);
+
+
+    //Call rep -
+    @GET("InTheaters")
+    Call<MoviesResponse> getInTheaters(
+            @Header(Constants.HEADLINES_COUNTRY) String country,
+            @Query("apiKey") String apiKey);
+
+
+    //Call rep -
+    @GET("MostPopularTVs")
+    Call<MoviesResponse> getMostPopularTVs(
+            @Header(Constants.HEADLINES_COUNTRY) String country,
+            @Query("apiKey") String apiKey);
+
+
+    //Call rep -
+    @GET("Search")
+    Call<MoviesResponse> getSearchResult(
+            @Header(Constants.HEADLINES_COUNTRY) String country,
+            @Query("apiKey") String apiKey,
+            @Query("expression") String searchExpression);
 }

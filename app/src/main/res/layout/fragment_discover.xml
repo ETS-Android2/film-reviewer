@@ -30,8 +30,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_margin="5dp"
-                    android:text="@string/search"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/submit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
@@ -40,9 +41,9 @@
                     android:layout_height="48dp"
                     android:layout_margin="5dp"
                     android:entries="@array/array_discover"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/button_discover"
-                    app:layout_constraintStart_toEndOf="@+id/button_discover"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/button_discover"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

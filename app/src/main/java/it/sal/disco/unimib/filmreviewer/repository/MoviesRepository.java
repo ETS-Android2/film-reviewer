@@ -43,17 +43,13 @@ public class MoviesRepository implements iMoviesRepository{
 
     @Override
     public MutableLiveData<MoviesResponse> getNewsMostPopular() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.API_BASE_URL).
-                addConverterFactory(GsonConverterFactory.create()).build();
-        ApiService mApiService = retrofit.create(ApiService.class);
-        Call<MoviesResponse> newsResponseCall = mApiService.getNews(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
-        //Call<MoviesResponse> newsResponseCall = getCorrectApiService(1);
+        Call<MoviesResponse> newsResponseCall = getCorrectApiService(2);
         newsResponseCall.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
                 Executors.newSingleThreadExecutor().execute(() -> {
                     Log.d("AAAAA", "MoviesRepository - onResponse - getNewsOnlineInDB");
-                    //Log.d("AAAA------2", response.toString());
+                    Log.d("AAAAA", response.toString());
                     if(response.body() != null){
                         List<Movie> newsList = response.body().getMoviesList();
                         mLiveData.postValue(new MoviesResponse(newsList));
@@ -65,22 +61,30 @@ public class MoviesRepository implements iMoviesRepository{
             @Override
             public void onFailure(@NonNull Call<MoviesResponse> call, @NonNull Throwable t) {
                 Log.d("AAAAA", "MoviesRepository - onFailure - getNewsOnlineInDB");
+                Log.d("AAAAA", t.toString());
             }});
         return mLiveData;
     }
 
     public static Call<MoviesResponse> getCorrectApiService(int input){
+        Retrofit retrofit = new Retrofit
+                .Builder()
+                .baseUrl(Constants.API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService mApiService = retrofit.create(ApiService.class);
+
         if(input == 1){
-            Retrofit retrofit = new Retrofit
-                    .Builder()
-                    .baseUrl(Constants.API_BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            ApiService mApiService = retrofit.create(ApiService.class);
             Call<MoviesResponse> newsResponseCall = mApiService
-                    .getNews(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
+                    .getMostPopularMovies(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
+            return newsResponseCall;
         }
 
+        if(input == 2){
+            Call<MoviesResponse> newsResponseCall = mApiService
+                    .getByKeyword(Constants.HEADLINES_COUNTRY, Constants.API_KEY,"dramas");
+            return newsResponseCall;
+        }
 
 
 
