@@ -12,13 +12,11 @@
     <string name="submit">Submit</string>
 
     <string-array name="array_discover">
-        <item>Italy</item>
-        <item>Germany</item>
-        <item>Spain</item>
-        <item>Swizerland</item>
-        <item>United State</item>
-        <item>Mexico</item>
-        <item>Other</item>
+        <item>MostPopularMovies</item>
+        <item>Top250Movies</item>
+        <item>ComingSoon</item>
+        <item>InTheaters</item>
+        <item>MostPopularTVs</item>
     </string-array>
 
 </resources>

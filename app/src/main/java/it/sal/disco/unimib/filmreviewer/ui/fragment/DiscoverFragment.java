@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -33,6 +34,7 @@ public class DiscoverFragment extends Fragment {
     private List<Movie> moviesList;
     private MoviesRecyclerViewAdapterAPI RecyclerViewAdapter;
     private DiscoverViewModel mDiscoverViewModel;
+    private int selected_index;
 
     public DiscoverFragment() {
         // Required empty public constructor
@@ -56,15 +58,13 @@ public class DiscoverFragment extends Fragment {
         mSpinnerDiscovery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id){
-                //prefCountry = mSpinnerDiscovery.getSelectedItemPosition();
+                selected_index = mSpinnerDiscovery.getSelectedItemPosition();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-
 
 
         //RecyclerView
@@ -104,7 +104,18 @@ public class DiscoverFragment extends Fragment {
                 }
             }
         };
-        mDiscoverViewModel.getNews().observe(getViewLifecycleOwner(), observer);
+
+
+        //Button
+        Button discoveryButton = this_view.findViewById(R.id.button_discover);
+        discoveryButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                mDiscoverViewModel.getNews(selected_index)
+                        .observe(getViewLifecycleOwner(), observer);
+            }
+        });
+
         return this_view;
     }
 }

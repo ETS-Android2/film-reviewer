@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -32,18 +31,8 @@ public class MoviesRepository implements iMoviesRepository{
     }
 
     @Override
-    public MutableLiveData<MoviesResponse> getNewsTest() {
-        List<Movie> moviesList = new ArrayList<>();
-        for(int i=0; i<20; i++){
-            moviesList.add(new Movie("Title"+i, "Desc"+i));
-        }
-        mLiveData.postValue(new MoviesResponse(moviesList));
-        return mLiveData;
-    }
-
-    @Override
-    public MutableLiveData<MoviesResponse> getNewsMostPopular() {
-        Call<MoviesResponse> newsResponseCall = getCorrectApiService(2);
+    public MutableLiveData<MoviesResponse> getNewsMostPopular(int selector) {
+        Call<MoviesResponse> newsResponseCall = getCorrectApiService(selector);
         newsResponseCall.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
@@ -73,23 +62,42 @@ public class MoviesRepository implements iMoviesRepository{
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService mApiService = retrofit.create(ApiService.class);
+        Call<MoviesResponse> newsResponseCall = null;
+
+        if(input == 0){
+            newsResponseCall = mApiService
+                    .getMostPopularMovies(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
+        }
 
         if(input == 1){
-            Call<MoviesResponse> newsResponseCall = mApiService
-                    .getMostPopularMovies(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
-            return newsResponseCall;
+            newsResponseCall = mApiService
+                    .getTop250(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
         }
 
         if(input == 2){
-            Call<MoviesResponse> newsResponseCall = mApiService
-                    .getByKeyword(Constants.HEADLINES_COUNTRY, Constants.API_KEY,"dramas");
-            return newsResponseCall;
+            newsResponseCall = mApiService
+                    .getComingSoon(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
         }
 
+        if(input == 3){
+            newsResponseCall = mApiService
+                    .getInTheaters(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
+        }
 
+        if(input == 4){
+            newsResponseCall = mApiService
+                    .getMostPopularTVs(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
+        }
 
+        if(input == 1000){
+            newsResponseCall = mApiService
+                    .getByKeyword(
+                            Constants.HEADLINES_COUNTRY,
+                            Constants.API_KEY,
+                            "dramas");
+        }
 
-        return null;
+        return newsResponseCall;
     }
 
 }

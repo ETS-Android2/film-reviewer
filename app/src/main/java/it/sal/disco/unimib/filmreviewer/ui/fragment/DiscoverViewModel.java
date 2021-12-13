@@ -26,11 +26,9 @@ public class DiscoverViewModel extends AndroidViewModel {
         mIMoviesRepository = new MoviesRepository(application);
     }
 
-    public MutableLiveData<MoviesResponse> getNews() {
+    public MutableLiveData<MoviesResponse> getNews(int selector) {
 
-        //mMoviesResponseLiveData = mIMoviesRepository.getNewsTest();
-            //Need to be adapted to new Movie class before use
-        mMoviesResponseLiveData = mIMoviesRepository.getNewsMostPopular();
+        mMoviesResponseLiveData = mIMoviesRepository.getNewsMostPopular(selector);
 
         return mMoviesResponseLiveData;
     }

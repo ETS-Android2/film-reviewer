@@ -9,51 +9,52 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    //Call rep 1
+    //Call rep 0
     @GET("MostPopularMovies")
     Call<MoviesResponse> getMostPopularMovies(
             @Header(Constants.HEADLINES_COUNTRY) String country,
             @Query("apiKey") String apiKey);
 
 
-    //Call rep 2,
-    @GET("Keyword")
-    Call<MoviesResponse> getByKeyword(
-            @Header(Constants.HEADLINES_COUNTRY) String country,
-            @Query("apiKey") String apiKey,
-            @Query("id") String query_value);
-            /*
-            * Use with:
-            *   dramas
-            *
-            */
-
-    //Call rep -
+    //Call rep 1
     @GET("Top250Movies")
     Call<MoviesResponse> getTop250(
             @Header(Constants.HEADLINES_COUNTRY) String country,
             @Query("apiKey") String apiKey);
 
 
-    //Call rep -
+    //Call rep 2
     @GET("ComingSoon")
     Call<MoviesResponse> getComingSoon(
             @Header(Constants.HEADLINES_COUNTRY) String country,
             @Query("apiKey") String apiKey);
 
 
-    //Call rep -
+    //Call rep 3
     @GET("InTheaters")
     Call<MoviesResponse> getInTheaters(
             @Header(Constants.HEADLINES_COUNTRY) String country,
             @Query("apiKey") String apiKey);
 
 
-    //Call rep -
+    //Call rep 4
     @GET("MostPopularTVs")
     Call<MoviesResponse> getMostPopularTVs(
             @Header(Constants.HEADLINES_COUNTRY) String country,
             @Query("apiKey") String apiKey);
+
+
+    //Call rep Z,
+    @GET("Keyword")
+    Call<MoviesResponse> getByKeyword(
+            @Header(Constants.HEADLINES_COUNTRY) String country,
+            @Query("apiKey") String apiKey,
+            @Query("id") String query_value);
+    /*
+     * Use with:
+     *   dramas
+     *
+     */
 
 
     //Call rep -
