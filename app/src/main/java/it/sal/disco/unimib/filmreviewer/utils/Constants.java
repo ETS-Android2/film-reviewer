@@ -16,4 +16,13 @@ public class Constants {
 
 
     public final static int API_MAX_FOR_PAGE = 25;
+
+
+    public static String getLittleImage(String inputUrl){
+        int index_c = inputUrl.lastIndexOf('@');
+        String result_s = inputUrl.substring(0, index_c);
+        result_s += "@._V1_UX128_CR0,3,128,176_AL_.jpg";
+
+        return result_s;
+    }
 }

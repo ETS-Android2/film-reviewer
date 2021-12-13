@@ -1,5 +1,6 @@
 package it.sal.disco.unimib.filmreviewer.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import it.sal.disco.unimib.filmreviewer.R;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
+import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
 public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRecyclerViewAdapterAPI.MoviesRecyclerViewHolderAPI> {
 
@@ -66,10 +68,9 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
                     .setText(String.valueOf(movie.getYear()));
 
             //PICASSO - Image Loading
-            String imageUri = movie.getImage();
+            String imageUri = Constants.getLittleImage(movie.getImage());
             ImageView ivBasicImage = itemView.findViewById(R.id.tv_imgv);
             Picasso.get().load(imageUri).into(ivBasicImage);
-            //Impostare che prende la versione piu piccola dell'immagine
 
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(movie));
         }
