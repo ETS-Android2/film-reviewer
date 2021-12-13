@@ -47,6 +47,7 @@ public class MoviesRepository implements iMoviesRepository{
                 addConverterFactory(GsonConverterFactory.create()).build();
         ApiService mApiService = retrofit.create(ApiService.class);
         Call<MoviesResponse> newsResponseCall = mApiService.getNews(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
+        //Call<MoviesResponse> newsResponseCall = getCorrectApiService(1);
         newsResponseCall.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
@@ -67,4 +68,24 @@ public class MoviesRepository implements iMoviesRepository{
             }});
         return mLiveData;
     }
+
+    public static Call<MoviesResponse> getCorrectApiService(int input){
+        if(input == 1){
+            Retrofit retrofit = new Retrofit
+                    .Builder()
+                    .baseUrl(Constants.API_BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            ApiService mApiService = retrofit.create(ApiService.class);
+            Call<MoviesResponse> newsResponseCall = mApiService
+                    .getNews(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
+        }
+
+
+
+
+
+        return null;
+    }
+
 }

@@ -10,5 +10,14 @@
     <string name="sample"></string>
     <string name="poster">Poster</string>
 
+    <string-array name="array_discover">
+        <item>Italy</item>
+        <item>Germany</item>
+        <item>Spain</item>
+        <item>Swizerland</item>
+        <item>United State</item>
+        <item>Mexico</item>
+        <item>Other</item>
+    </string-array>
 
 </resources>

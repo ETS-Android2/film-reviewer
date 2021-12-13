@@ -15,8 +15,8 @@ public class Constants {
     public final static String HEADLINES_COUNTRY_IT = "it";
     public final static String HEADLINES_COUNTRY_EN = "en";
 
-    public final static String API_KEY = "k_613gh8jx";
-    //public final static String API_KEY = "k_lkvlsrmu";
+    //public final static String API_KEY = "k_613gh8jx";
+    public final static String API_KEY = "k_lkvlsrmu";
     public final static String HEADLINES_APIKEY_PR = "apiKey";
 
 
@@ -30,11 +30,10 @@ public class Constants {
             result_s += "@._V1_UX128_CR0,3,128,176_AL_.jpg";
             return result_s;
         }else{
-            Log.d("AAAAA", "ERRORE getLittleImage, non caricata immmagine piccola");
+            Log.d("AAAAA", "getLittleImage, caricata immmagine grande");
             return inputUrl;
         }
     }
-
 
     public static int[] imagePosterSize(int lambda){
         int[] aa = {0, 0};
