@@ -38,7 +38,6 @@ public class MoviesRepository implements iMoviesRepository{
             public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
                 Executors.newSingleThreadExecutor().execute(() -> {
                     Log.d("AAAAA", "MoviesRepository - onResponse - getNewsOnlineInDB");
-                    Log.d("AAAAA", response.toString());
                     if(response.body() != null){
                         List<Movie> newsList = response.body().getMoviesList();
                         mLiveData.postValue(new MoviesResponse(newsList));

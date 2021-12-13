@@ -27,9 +27,7 @@ public class DiscoverViewModel extends AndroidViewModel {
     }
 
     public MutableLiveData<MoviesResponse> getNews(int selector) {
-
         mMoviesResponseLiveData = mIMoviesRepository.getNewsMostPopular(selector);
-
         return mMoviesResponseLiveData;
     }
 }

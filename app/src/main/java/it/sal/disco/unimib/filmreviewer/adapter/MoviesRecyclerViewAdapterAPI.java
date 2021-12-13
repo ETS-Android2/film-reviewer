@@ -60,12 +60,13 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
         }
 
         public void bind(Movie movie){
+            //Text Setting
             ((TextView) itemView.findViewById(R.id.tv_title))
                     .setText(movie.getTitle());
             ((TextView) itemView.findViewById(R.id.tv_desc))
                     .setText(String.valueOf(movie.getYear()));
 
-            //PICASSO - Image Loading
+            //Image Loading
             String imageUri = Constants.getLittleImage(movie.getImage());
             ImageView ivBasicImage = itemView.findViewById(R.id.tv_imgv);
             int[] size = Constants.imagePosterSize(5);

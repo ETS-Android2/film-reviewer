@@ -7,10 +7,6 @@ public class MoviesResponse {
     private List<Movie> items;
     private String errorMessage;
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
     public MoviesResponse(List<Movie> moviesList) {
         this.items = moviesList;
     }
@@ -26,7 +22,29 @@ public class MoviesResponse {
         this.errorMessage = errorMessage;
     }
 
-    public List<Movie> getMoviesList() {
+    public List<Movie> getMoviesList() {return items;}
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public List<Movie> getItems() {
         return items;
+    }
+
+    public void setItems(List<Movie> items) {
+        this.items = items;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }
