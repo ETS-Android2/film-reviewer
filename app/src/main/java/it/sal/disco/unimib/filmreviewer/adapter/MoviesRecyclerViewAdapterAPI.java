@@ -1,6 +1,5 @@
 package it.sal.disco.unimib.filmreviewer.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +60,6 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
         }
 
         public void bind(Movie movie){
-            //OLD1
             ((TextView) itemView.findViewById(R.id.tv_title))
                     .setText(movie.getTitle());
             ((TextView) itemView.findViewById(R.id.tv_desc))
@@ -70,7 +68,12 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
             //PICASSO - Image Loading
             String imageUri = Constants.getLittleImage(movie.getImage());
             ImageView ivBasicImage = itemView.findViewById(R.id.tv_imgv);
-            Picasso.get().load(imageUri).into(ivBasicImage);
+            int[] size = Constants.imagePosterSize(5);
+            Picasso.get()
+                    .load(imageUri)
+                    .resize(size[0], size[1])
+                    .centerCrop()
+                    .into(ivBasicImage);
 
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(movie));
         }

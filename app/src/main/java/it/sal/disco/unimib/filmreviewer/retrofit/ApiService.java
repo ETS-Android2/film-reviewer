@@ -12,4 +12,15 @@ public interface ApiService {
     Call<MoviesResponse> getNews(
             @Header(Constants.HEADLINES_COUNTRY_PR) String country,
             @Query(Constants.HEADLINES_APIKEY_PR) String apiKey);
+
+
+    //https://imdb-api.com/en/API/Keyword/k_613gh8jx/action-hero
+    /*
+    @GET("Keyword")
+    Call<MoviesResponse> getActionHeros(
+            @Header(Constants.HEADLINES_COUNTRY_PR) String country,
+            @Header("id") String "action-hero",
+            @Query(Constants.HEADLINES_APIKEY_PR) String apiKey);
+
+     */
 }

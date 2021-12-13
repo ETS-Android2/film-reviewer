@@ -51,19 +51,19 @@ public class MoviesRepository implements iMoviesRepository{
             @Override
             public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
                 Executors.newSingleThreadExecutor().execute(() -> {
-                    Log.d("MoviesRepository", "onResponse - getNewsOnlineInDB");
+                    Log.d("AAAAA", "MoviesRepository - onResponse - getNewsOnlineInDB");
                     //Log.d("AAAA------2", response.toString());
                     if(response.body() != null){
                         List<Movie> newsList = response.body().getMoviesList();
                         mLiveData.postValue(new MoviesResponse(newsList));
                     }else{
-                        Log.d("MoviesRepository", "onResponse - getNewsOnlineInDB - ERROR response");
+                        Log.d("AAAAA", "MoviesRepository - onResponse - getNewsOnlineInDB - ERROR response");
                     }
                 });
             }
             @Override
             public void onFailure(@NonNull Call<MoviesResponse> call, @NonNull Throwable t) {
-                Log.d("MoviesRepository", "onFailure - getNewsOnlineInDB");
+                Log.d("AAAAA", "MoviesRepository - onFailure - getNewsOnlineInDB");
             }});
         return mLiveData;
     }

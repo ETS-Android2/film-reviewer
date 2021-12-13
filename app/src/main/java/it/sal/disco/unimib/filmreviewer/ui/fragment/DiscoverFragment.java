@@ -78,7 +78,7 @@ public class DiscoverFragment extends Fragment {
             }else{
                 if (moviesResponse.getMoviesList() != null) {
                     moviesList.clear();
-                    for(int i=0; i<Constants.API_MAX_FOR_PAGE; i++){
+                    for(int i=0; i<Constants.API_MAX_FOR_PAGE && i<moviesResponse.getMoviesList().size(); i++){
                         moviesList.add(moviesResponse.getMoviesList().get(i));
                     }
                     //moviesList.addAll(moviesResponse.getMoviesList());
