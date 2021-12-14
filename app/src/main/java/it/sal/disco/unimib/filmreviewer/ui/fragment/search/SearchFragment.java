@@ -82,7 +82,7 @@ public class SearchFragment extends Fragment {
             if (moviesResponse.getMoviesList() == null) {
                 Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
-                        "Can't load movies - List null",
+                        R.string.noMovies,
                         Snackbar.LENGTH_LONG)
                         .show();
             }else{
