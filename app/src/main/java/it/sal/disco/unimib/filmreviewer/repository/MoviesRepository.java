@@ -6,6 +6,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -31,72 +33,79 @@ public class MoviesRepository implements iMoviesRepository{
     }
 
     @Override
-    public MutableLiveData<MoviesResponse> getNewsMostPopular(int selector) {
-        Call<MoviesResponse> newsResponseCall = getCorrectApiService(selector);
-        newsResponseCall.enqueue(new Callback<MoviesResponse>() {
+    public MutableLiveData<MoviesResponse> getMovies(int selector, String opz_param) {
+        Call<MoviesResponse> moviesResponseCall = getCorrectApiService(selector, opz_param);
+        moviesResponseCall.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
                 Executors.newSingleThreadExecutor().execute(() -> {
-                    Log.d("AAAAA", "MoviesRepository - onResponse - getNewsOnlineInDB");
+                    Log.d("DEBUG", "onResponse-getMovies");
                     if(response.body() != null){
-                        List<Movie> newsList = response.body().getMoviesList();
-                        mLiveData.postValue(new MoviesResponse(newsList));
+                        List<Movie> movieList = response.body().getMoviesList();
+                        mLiveData.postValue(new MoviesResponse(movieList));
                     }else{
-                        Log.d("AAAAA", "MoviesRepository - onResponse - getNewsOnlineInDB - ERROR response");
+                        Log.d("DEBUG", "onResponse-getMovies-errorResponse");
                     }
                 });
             }
             @Override
             public void onFailure(@NonNull Call<MoviesResponse> call, @NonNull Throwable t) {
-                Log.d("AAAAA", "MoviesRepository - onFailure - getNewsOnlineInDB");
-                Log.d("AAAAA", t.toString());
+                Log.d("DEBUG", "onFailure-getNewsOnlineInDB-"+t.toString());
             }});
         return mLiveData;
     }
 
-    public static Call<MoviesResponse> getCorrectApiService(int input){
+    public static Call<MoviesResponse> getCorrectApiService(int input, String opz_param){
         Retrofit retrofit = new Retrofit
                 .Builder()
                 .baseUrl(Constants.API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService mApiService = retrofit.create(ApiService.class);
-        Call<MoviesResponse> newsResponseCall = null;
+        Call<MoviesResponse> MoviesResponseCall = null;
 
         if(input == 0){
-            newsResponseCall = mApiService
+            MoviesResponseCall = mApiService
                     .getMostPopularMovies(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
         }
 
         if(input == 1){
-            newsResponseCall = mApiService
+            MoviesResponseCall = mApiService
                     .getTop250(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
         }
 
         if(input == 2){
-            newsResponseCall = mApiService
+            MoviesResponseCall = mApiService
                     .getComingSoon(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
         }
 
         if(input == 3){
-            newsResponseCall = mApiService
+            MoviesResponseCall = mApiService
                     .getInTheaters(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
         }
 
         if(input == 4){
-            newsResponseCall = mApiService
+            MoviesResponseCall = mApiService
                     .getMostPopularTVs(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
         }
 
         if(input == 1000){
-            newsResponseCall = mApiService
+            MoviesResponseCall = mApiService
                     .getByKeyword(
                             Constants.HEADLINES_COUNTRY,
                             Constants.API_KEY,
                             "dramas");
         }
 
-        return newsResponseCall;
+        if(input == 99){
+            MoviesResponseCall = mApiService
+                    .getSearchResult(
+                            Constants.HEADLINES_COUNTRY,
+                            Constants.API_KEY,
+                            opz_param);
+        }
+
+        return MoviesResponseCall;
     }
 
 }

@@ -5,5 +5,5 @@ import androidx.lifecycle.MutableLiveData;
 import it.sal.disco.unimib.filmreviewer.customObj.MoviesResponse;
 
 public interface iMoviesRepository {
-    MutableLiveData<MoviesResponse> getNewsMostPopular(int selector);
+    MutableLiveData<MoviesResponse> getMovies(int selector, String opz_param);
 }

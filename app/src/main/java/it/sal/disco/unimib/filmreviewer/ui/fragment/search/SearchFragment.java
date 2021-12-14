@@ -1,4 +1,4 @@
-package it.sal.disco.unimib.filmreviewer.ui.fragment;
+package it.sal.disco.unimib.filmreviewer.ui.fragment.search;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,9 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.SearchView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -26,62 +25,49 @@ import it.sal.disco.unimib.filmreviewer.R;
 import it.sal.disco.unimib.filmreviewer.adapter.MoviesRecyclerViewAdapterAPI;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 import it.sal.disco.unimib.filmreviewer.customObj.MoviesResponse;
+import it.sal.disco.unimib.filmreviewer.ui.fragment.discover.DiscoverViewModel;
 import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
-
-public class DiscoverFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
     private List<Movie> moviesList;
     private MoviesRecyclerViewAdapterAPI RecyclerViewAdapter;
-    private DiscoverViewModel mDiscoverViewModel;
-    private int selected_index;
+    private SearchViewModel mSearchViewModel;
 
-    public DiscoverFragment() {
-        // Required empty public constructor
-    }
+    public SearchFragment() {}
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         this.moviesList = new ArrayList<>();
-        mDiscoverViewModel = new ViewModelProvider(requireActivity()).get(DiscoverViewModel.class);
+        mSearchViewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View this_view = inflater.inflate(R.layout.fragment_discover, container, false);
+        View this_view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        //Spinner
-        Spinner mSpinnerDiscovery = this_view.findViewById(R.id.spinner_discover);
-        mSpinnerDiscovery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id){
-                selected_index = mSpinnerDiscovery.getSelectedItemPosition();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
 
 
         //RecyclerView
-        RecyclerView countryNewsRecyclerView = this_view.findViewById(R.id.discover_recycler_view);
+        RecyclerView mRecyclerView = this_view.findViewById(R.id.search_recycler_view);
         //CACHE RECYCLERVIEW /**/
-        countryNewsRecyclerView.setHasFixedSize(true);
-        countryNewsRecyclerView.setItemViewCacheSize(35);
-        countryNewsRecyclerView.setDrawingCacheEnabled(true);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setItemViewCacheSize(35);
+        mRecyclerView.setDrawingCacheEnabled(true);
         //FINE CACHE RECYCLERVIEW
-        countryNewsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         RecyclerViewAdapter =
                 new MoviesRecyclerViewAdapterAPI(
                         this.moviesList,
                         movie -> Log.d(
-                                "DiscoverFragment",
+                                "SearchFragment",
                                 "CLICKED RecycleView element " + movie.toString()));
-        countryNewsRecyclerView.setAdapter(RecyclerViewAdapter);
+        mRecyclerView.setAdapter(RecyclerViewAdapter);
+
 
 
         //Observer for when View model change state
@@ -90,31 +76,36 @@ public class DiscoverFragment extends Fragment {
             if (moviesResponse.getMoviesList() == null) {
                 Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
-                        "Error moviesResponse",
+                        "Can't load movies - List null",
                         Snackbar.LENGTH_LONG)
                         .show();
             }else{
                 if (moviesResponse.getMoviesList() != null) {
                     moviesList.clear();
-                    for(int i=0; i<Constants.API_MAX_FOR_PAGE && i<moviesResponse.getMoviesList().size(); i++){
+                    for(int i = 0; i< Constants.API_MAX_FOR_PAGE && i<moviesResponse.getMoviesList().size(); i++){
                         moviesList.add(moviesResponse.getMoviesList().get(i));
                     }
-                    //moviesList.addAll(moviesResponse.getMoviesList());
                     RecyclerViewAdapter.notifyDataSetChanged();
                 }
             }
         };
 
 
-        //Button
-        Button discoveryButton = this_view.findViewById(R.id.button_discover);
-        discoveryButton.setOnClickListener(new View.OnClickListener(){
+
+        //Button & SearchView
+        SearchView searchView = this_view.findViewById(R.id.search_search);
+        Button searchButton = this_view.findViewById(R.id.button_search);
+        searchButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                mDiscoverViewModel.getNews(selected_index)
+                String query = searchView.getQuery().toString();
+                Log.d("ZZZZZ-", query);
+                mSearchViewModel.getMovies(99, query)
                         .observe(getViewLifecycleOwner(), observer);
             }
         });
+
+
 
         return this_view;
     }
