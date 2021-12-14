@@ -7,6 +7,10 @@ public class MoviesResponse {
     private List<Movie> items;
     private String errorMessage;
 
+    private List<Movie> results;
+    private String searchType;
+    private String expression;
+
     public MoviesResponse(List<Movie> moviesList) {
         this.items = moviesList;
     }
@@ -22,7 +26,15 @@ public class MoviesResponse {
         this.errorMessage = errorMessage;
     }
 
-    public List<Movie> getMoviesList() {return items;}
+    public List<Movie> getMoviesList() {
+        if(items != null && !items.isEmpty()){
+            return items;
+        }else{
+            return results;
+        }
+
+
+    }
 
     public String getKeyword() {
         return keyword;
