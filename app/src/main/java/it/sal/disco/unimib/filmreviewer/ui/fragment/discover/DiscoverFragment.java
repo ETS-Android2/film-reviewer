@@ -66,13 +66,16 @@ public class DiscoverFragment extends Fragment {
             }
         });
 
+        moviesList.clear();
 
         //RecyclerView
         RecyclerView mRecyclerView = this_view.findViewById(R.id.discover_recycler_view);
-        //CACHE RECYCLERVIEW /**/
+        //CACHE RECYCLERVIEW
+        /*
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemViewCacheSize(35);
         mRecyclerView.setDrawingCacheEnabled(true);
+        */
         //FINE CACHE RECYCLERVIEW
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         RecyclerViewAdapter =
@@ -82,7 +85,6 @@ public class DiscoverFragment extends Fragment {
                                 "DiscoverFragment",
                                 "CLICKED RecycleView element " + movie.toString()));
         mRecyclerView.setAdapter(RecyclerViewAdapter);
-
 
         //Observer for when View model change state
         @SuppressLint("NotifyDataSetChanged")
@@ -105,15 +107,11 @@ public class DiscoverFragment extends Fragment {
             }
         };
 
-
         //Button
         Button discoveryButton = this_view.findViewById(R.id.button_discover);
-        discoveryButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                mDiscoverViewModel.getMovies(selected_index, null)
-                        .observe(getViewLifecycleOwner(), observer);
-            }
+        discoveryButton.setOnClickListener(v -> {
+            mDiscoverViewModel.getMovies(selected_index, null)
+                    .observe(getViewLifecycleOwner(), observer);
         });
 
         return this_view;

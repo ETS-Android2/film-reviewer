@@ -68,13 +68,15 @@ public class Movie {
     }
 
     public String getYear() {
+        return year;
+    }
+
+    public String getTitle2() {
         if(year!=null && !year.isEmpty()){
             return year;
         }else{
             return description;
         }
-
-
     }
 
     public void setYear(String year) {

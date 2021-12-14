@@ -2,19 +2,18 @@ package it.sal.disco.unimib.filmreviewer.ui.fragment.search;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -25,7 +24,6 @@ import it.sal.disco.unimib.filmreviewer.R;
 import it.sal.disco.unimib.filmreviewer.adapter.MoviesRecyclerViewAdapterAPI;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 import it.sal.disco.unimib.filmreviewer.customObj.MoviesResponse;
-import it.sal.disco.unimib.filmreviewer.ui.fragment.discover.DiscoverViewModel;
 import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
 public class SearchFragment extends Fragment {
@@ -54,10 +52,12 @@ public class SearchFragment extends Fragment {
 
         //RecyclerView
         RecyclerView mRecyclerView = this_view.findViewById(R.id.search_recycler_view);
-        //CACHE RECYCLERVIEW /**/
+        //CACHE RECYCLERVIEW
+        /*
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemViewCacheSize(35);
         mRecyclerView.setDrawingCacheEnabled(true);
+        */
         //FINE CACHE RECYCLERVIEW
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         RecyclerViewAdapter =
@@ -95,14 +95,10 @@ public class SearchFragment extends Fragment {
         //Button & SearchView
         SearchView searchView = this_view.findViewById(R.id.search_search);
         Button searchButton = this_view.findViewById(R.id.button_search);
-        searchButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                String query = searchView.getQuery().toString();
-                Log.d("ZZZZZ-", query);
-                mSearchViewModel.getMovies(99, query)
-                        .observe(getViewLifecycleOwner(), observer);
-            }
+        searchButton.setOnClickListener(v -> {
+            String query = searchView.getQuery().toString();
+            mSearchViewModel.getMovies(99, query)
+                    .observe(getViewLifecycleOwner(), observer);
         });
 
 

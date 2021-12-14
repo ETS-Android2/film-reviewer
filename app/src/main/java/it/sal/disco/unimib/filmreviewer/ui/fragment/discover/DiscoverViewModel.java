@@ -30,4 +30,5 @@ public class DiscoverViewModel extends AndroidViewModel {
         mMoviesResponseLiveData = mIMoviesRepository.getMovies(selector, opz_param);
         return mMoviesResponseLiveData;
     }
+
 }

@@ -6,8 +6,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -25,7 +23,7 @@ public class MoviesRepository implements iMoviesRepository{
     private Application mApplication;
     //private final NewsDao mNewsDao;
     private MutableLiveData<MoviesResponse> mLiveData;
-    private final MoviesRepository reference_to_repository = this;
+    //private final MoviesRepository reference_to_repository = this;
 
     public MoviesRepository(Application mApplication){
         this.mApplication = mApplication;
@@ -34,6 +32,7 @@ public class MoviesRepository implements iMoviesRepository{
 
     @Override
     public MutableLiveData<MoviesResponse> getMovies(int selector, String opz_param) {
+        mLiveData = new MutableLiveData<>();
         Call<MoviesResponse> moviesResponseCall = getCorrectApiService(selector, opz_param);
         moviesResponseCall.enqueue(new Callback<MoviesResponse>() {
             @Override
@@ -107,5 +106,4 @@ public class MoviesRepository implements iMoviesRepository{
 
         return MoviesResponseCall;
     }
-
 }

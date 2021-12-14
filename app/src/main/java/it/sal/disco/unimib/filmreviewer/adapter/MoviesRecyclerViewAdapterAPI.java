@@ -64,7 +64,7 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
             ((TextView) itemView.findViewById(R.id.tv_title))
                     .setText(movie.getTitle());
             ((TextView) itemView.findViewById(R.id.tv_desc))
-                    .setText(String.valueOf(movie.getYear()));
+                    .setText(String.valueOf(movie.getTitle2()));
 
             //Image Loading
             String imageUri = Constants.getLittleImage(movie.getImage());

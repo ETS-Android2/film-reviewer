@@ -32,8 +32,6 @@ public class MoviesResponse {
         }else{
             return results;
         }
-
-
     }
 
     public String getKeyword() {
