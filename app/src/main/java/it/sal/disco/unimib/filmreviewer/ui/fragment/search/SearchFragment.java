@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
@@ -49,6 +50,10 @@ public class SearchFragment extends Fragment {
         View this_view = inflater.inflate(R.layout.fragment_search, container, false);
 
 
+        //ProgressBar
+        ProgressBar pgrbar = this_view.findViewById(R.id.search_progressBar);
+        pgrbar.setVisibility(View.INVISIBLE);
+
 
         //RecyclerView
         RecyclerView mRecyclerView = this_view.findViewById(R.id.search_recycler_view);
@@ -73,6 +78,7 @@ public class SearchFragment extends Fragment {
         //Observer for when View model change state
         @SuppressLint("NotifyDataSetChanged")
         Observer<MoviesResponse> observer = moviesResponse -> {
+            pgrbar.setVisibility(View.INVISIBLE);
             if (moviesResponse.getMoviesList() == null) {
                 Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
@@ -96,6 +102,7 @@ public class SearchFragment extends Fragment {
         SearchView searchView = this_view.findViewById(R.id.search_search);
         Button searchButton = this_view.findViewById(R.id.button_search);
         searchButton.setOnClickListener(v -> {
+            pgrbar.setVisibility(View.VISIBLE);
             String query = searchView.getQuery().toString();
             mSearchViewModel.getMovies(99, query)
                     .observe(getViewLifecycleOwner(), observer);

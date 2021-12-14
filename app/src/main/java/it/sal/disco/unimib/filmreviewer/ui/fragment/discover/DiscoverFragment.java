@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -53,6 +54,8 @@ public class DiscoverFragment extends Fragment {
                              Bundle savedInstanceState) {
         View this_view = inflater.inflate(R.layout.fragment_discover, container, false);
 
+
+
         //Spinner
         Spinner mSpinnerDiscovery = this_view.findViewById(R.id.spinner_discover);
         mSpinnerDiscovery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -66,7 +69,18 @@ public class DiscoverFragment extends Fragment {
             }
         });
 
+
+
+        //Clear
         moviesList.clear();
+
+
+
+        //ProgressBar
+        ProgressBar pgrbar = this_view.findViewById(R.id.discover_progressBar);
+        pgrbar.setVisibility(View.INVISIBLE);
+
+
 
         //RecyclerView
         RecyclerView mRecyclerView = this_view.findViewById(R.id.discover_recycler_view);
@@ -86,9 +100,12 @@ public class DiscoverFragment extends Fragment {
                                 "CLICKED RecycleView element " + movie.toString()));
         mRecyclerView.setAdapter(RecyclerViewAdapter);
 
+
+
         //Observer for when View model change state
         @SuppressLint("NotifyDataSetChanged")
         Observer<MoviesResponse> observer = moviesResponse -> {
+            pgrbar.setVisibility(View.INVISIBLE);
             if (moviesResponse.getMoviesList() == null) {
                 Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
@@ -107,9 +124,12 @@ public class DiscoverFragment extends Fragment {
             }
         };
 
+
+
         //Button
         Button discoveryButton = this_view.findViewById(R.id.button_discover);
         discoveryButton.setOnClickListener(v -> {
+            pgrbar.setVisibility(View.VISIBLE);
             mDiscoverViewModel.getMovies(selected_index, null)
                     .observe(getViewLifecycleOwner(), observer);
         });

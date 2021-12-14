@@ -65,14 +65,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ProgressBar
+                    android:id="@+id/discover_progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:scrollbarSize="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/discover_recycler_view"
+                    app:layout_constraintTop_toTopOf="@+id/discover_recycler_view" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/discover_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
