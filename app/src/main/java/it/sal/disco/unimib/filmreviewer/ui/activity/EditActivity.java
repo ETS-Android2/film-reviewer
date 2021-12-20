@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -28,6 +29,7 @@ public class EditActivity extends AppCompatActivity {
 
     private EditActivityViewModel mEditViewModel;
     private Movie currentMovie; //sostituto di moviesList
+    private String oldImage;
 
 
     @Override
@@ -37,23 +39,15 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
         mEditViewModel = new ViewModelProvider(this).get(EditActivityViewModel.class);
 
-        //UI object-related
-        TextView titleMovie = findViewById(R.id.movieTitle);
-        TextView fulltitleMovie = findViewById(R.id.movieFullTitle);
-        TextView relaseMovie = findViewById(R.id.movieRelaseDate);
-        TextView plotMovie = findViewById(R.id.moviePlot);
-        ImageView imageMovie = findViewById(R.id.movieImage);
-
-
-        //TESTING
-        //currentMovie = null;  //da mettere piu avanti
 
         /*
-            //ProgressBar
+        //ProgressBar
         ProgressBar pgrbar = this_view.findViewById(R.id.discover_progressBar);
         pgrbar.setVisibility(View.INVISIBLE);
         */
 
+
+        //Observer
         @SuppressLint("NotifyDataSetChanged")
         Observer<Movie> observer = movie -> {
             //pgrbar.setVisibility(View.INVISIBLE);
@@ -65,18 +59,37 @@ public class EditActivity extends AppCompatActivity {
                         .show();
             }else{
                 currentMovie = movie;
-
-                //aggiornaInformazioniUI();
-                titleMovie.setText(currentMovie.getTitle());
-                fulltitleMovie.setText(currentMovie.getFullTitle());
-                relaseMovie.setText(currentMovie.getReleaseDate());
-                plotMovie.setText(currentMovie.getPlot());
-                Picasso.get().load(currentMovie.getImage()).into(imageMovie);
-
-
+                updateInfo();
             }
         };
         mEditViewModel.getSpecificMovies()
                 .observe(this, observer);
+    }
+
+
+    private void updateInfo(){
+        //UI object-related
+        TextView titleMovie = findViewById(R.id.movieTitle);
+        TextView fulltitleMovie = findViewById(R.id.movieFullTitle);
+        TextView relaseMovie = findViewById(R.id.movieRelaseDate);
+        TextView plotMovie = findViewById(R.id.moviePlot);
+        ImageView imageMovie = findViewById(R.id.movieImage);
+
+
+        //Check if there are posters
+        String link1poster;
+        if(currentMovie.getPosters().getPosters().size() > 0){
+            link1poster = currentMovie.getPosters().getPosters().get(0).getLink();
+        }else{
+            link1poster = "";
+        }
+
+
+        //UI effective update
+        titleMovie.setText(currentMovie.getTitle());
+        fulltitleMovie.setText(currentMovie.getFullTitle());
+        relaseMovie.setText("Release: "+currentMovie.getReleaseDate());
+        plotMovie.setText(currentMovie.getPlot());
+        Picasso.get().load(link1poster).placeholder(R.drawable.ic_baseline_movie_filter_24).into(imageMovie);
     }
 }

@@ -70,5 +70,8 @@ public interface ApiService {
     Call<Movie> getSpecificMovie(
             @Header(Constants.HEADLINES_COUNTRY) String country,
             @Query("apiKey") String apiKey,
-            @Query("id") String id);
+            @Query("id") String id,
+            @Query("options") String posters);
+
+
 }

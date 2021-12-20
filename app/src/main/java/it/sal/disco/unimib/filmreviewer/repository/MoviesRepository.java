@@ -48,7 +48,8 @@ public class MoviesRepository implements iMoviesRepository{
                 .getSpecificMovie(
                         Constants.HEADLINES_COUNTRY,
                         Constants.API_KEY,
-                        id);
+                        id,
+                        "Posters");
         movieResponseCall.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {
