@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -70,12 +71,18 @@ public class EditActivity extends AppCompatActivity {
     private void updateInfo(){
         //UI object-related
         TextView titleMovie = findViewById(R.id.movieTitle);
+        titleMovie.setText(currentMovie.getTitle());
+
         TextView fulltitleMovie = findViewById(R.id.movieFullTitle);
+        fulltitleMovie.setText(currentMovie.getFullTitle());
+
         TextView relaseMovie = findViewById(R.id.movieRelaseDate);
+        relaseMovie.setText("Release: "+currentMovie.getReleaseDate());
+
         TextView plotMovie = findViewById(R.id.moviePlot);
+        plotMovie.setText(currentMovie.getPlot());
+
         ImageView imageMovie = findViewById(R.id.movieImage);
-
-
         //Check if there are posters
         String link1poster;
         if(currentMovie.getPosters().getPosters().size() > 0){
@@ -83,13 +90,18 @@ public class EditActivity extends AppCompatActivity {
         }else{
             link1poster = "";
         }
-
-
-        //UI effective update
-        titleMovie.setText(currentMovie.getTitle());
-        fulltitleMovie.setText(currentMovie.getFullTitle());
-        relaseMovie.setText("Release: "+currentMovie.getReleaseDate());
-        plotMovie.setText(currentMovie.getPlot());
         Picasso.get().load(link1poster).placeholder(R.drawable.ic_baseline_movie_filter_24).into(imageMovie);
+
+        RatingBar ratingbarMovie = findViewById(R.id.ratingBar);
+        ratingbarMovie.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Log.d("XXXX", String.valueOf(rating));
+            }
+        });
+
+        TextView lengMovie = findViewById(R.id.movieLanguages);
+        lengMovie.setText("Languages: "+currentMovie.getLanguages());
+
     }
 }
