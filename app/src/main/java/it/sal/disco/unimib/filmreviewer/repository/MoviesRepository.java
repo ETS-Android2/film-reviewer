@@ -23,12 +23,52 @@ public class MoviesRepository implements iMoviesRepository{
     private Application mApplication;
     //private final NewsDao mNewsDao;
     private MutableLiveData<MoviesResponse> mLiveData;
+    private MutableLiveData<Movie> mLiveDataMovie;
     //private final MoviesRepository reference_to_repository = this;
 
     public MoviesRepository(Application mApplication){
         this.mApplication = mApplication;
         this.mLiveData = new MutableLiveData<>();
     }
+
+    @Override
+    public MutableLiveData<Movie> getSelectedMovie(String id) {
+        mLiveDataMovie = new MutableLiveData<>();
+
+        //Retrofit initialization
+        Retrofit retrofit = new Retrofit
+                .Builder()
+                .baseUrl(Constants.API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService mApiService = retrofit.create(ApiService.class);
+
+        //Other
+        Call<Movie> movieResponseCall = mApiService
+                .getSpecificMovie(
+                        Constants.HEADLINES_COUNTRY,
+                        Constants.API_KEY,
+                        id);
+        movieResponseCall.enqueue(new Callback<Movie>() {
+            @Override
+            public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {
+                Executors.newSingleThreadExecutor().execute(() -> {
+                    Log.d("DEBUG", "onResponse-getSelectedMovie");
+                    if(response.body() != null){
+                        Movie selected = response.body();
+                        mLiveDataMovie.postValue(selected);
+                    }else{
+                        Log.d("DEBUG", "onResponse-getSelectedMovie-errorResponse");
+                    }
+                });
+            }
+            @Override
+            public void onFailure(@NonNull Call<Movie> call, @NonNull Throwable t) {
+                Log.d("DEBUG", "onFailure-getNewsOnlineInDB-"+t.toString());
+            }});
+        return mLiveDataMovie;
+    }
+
 
     @Override
     public MutableLiveData<MoviesResponse> getMovies(int selector, String opz_param) {
@@ -53,6 +93,7 @@ public class MoviesRepository implements iMoviesRepository{
             }});
         return mLiveData;
     }
+
 
     public static Call<MoviesResponse> getCorrectApiService(int input, String opz_param){
         Retrofit retrofit = new Retrofit

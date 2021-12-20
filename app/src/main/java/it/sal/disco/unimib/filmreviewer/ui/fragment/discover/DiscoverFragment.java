@@ -1,6 +1,7 @@
 package it.sal.disco.unimib.filmreviewer.ui.fragment.discover;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -22,11 +23,13 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import it.sal.disco.unimib.filmreviewer.R;
 import it.sal.disco.unimib.filmreviewer.adapter.MoviesRecyclerViewAdapterAPI;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 import it.sal.disco.unimib.filmreviewer.customObj.MoviesResponse;
+import it.sal.disco.unimib.filmreviewer.ui.activity.EditActivity;
 import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
 
@@ -93,11 +96,22 @@ public class DiscoverFragment extends Fragment {
         //FINE CACHE RECYCLERVIEW
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         RecyclerViewAdapter =
-                new MoviesRecyclerViewAdapterAPI(
-                        this.moviesList,
-                        movie -> Log.d(
+                new MoviesRecyclerViewAdapterAPI(this.moviesList, new MoviesRecyclerViewAdapterAPI.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Movie movie) {
+                        //DEBUG print
+                        Log.d(
                                 "DiscoverFragment",
-                                "CLICKED RecycleView element " + movie.toString()));
+                                "CLICKED RecycleView element " + movie.toString());
+
+                        //Set current movie as movie to be edited
+                        Constants.selectedMovie = movie;
+
+                        //launch intent EditActivity
+                        Intent intentI = new Intent(getContext(), EditActivity.class);
+                        startActivity(intentI);
+                    }
+                });
         mRecyclerView.setAdapter(RecyclerViewAdapter);
 
 

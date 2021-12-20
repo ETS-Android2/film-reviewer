@@ -1,5 +1,6 @@
 package it.sal.disco.unimib.filmreviewer.retrofit;
 
+import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 import it.sal.disco.unimib.filmreviewer.customObj.MoviesResponse;
 import it.sal.disco.unimib.filmreviewer.utils.Constants;
 import retrofit2.Call;
@@ -44,23 +45,30 @@ public interface ApiService {
             @Query("apiKey") String apiKey);
 
 
-    //Call rep Z,
-    @GET("Keyword")
-    Call<MoviesResponse> getByKeyword(
-            @Header(Constants.HEADLINES_COUNTRY) String country,
-            @Query("apiKey") String apiKey,
-            @Query("id") String query_value);
-            /*
-             * Use with:
-             *   dramas
-             *
-             */
-
-
     //Call rep 99
     @GET("Search")
     Call<MoviesResponse> getSearchResult(
             @Header(Constants.HEADLINES_COUNTRY) String country,
             @Query("apiKey") String apiKey,
             @Query("expression") String searchExpression);
+
+
+    //Call rep Z,
+    @GET("Keyword")
+    Call<MoviesResponse> getByKeyword(
+            @Header(Constants.HEADLINES_COUNTRY) String country,
+            @Query("apiKey") String apiKey,
+            @Query("id") String query_value);
+    /*
+     * Use with:
+     *   dramas
+     *
+     */
+
+    //Call rep --
+    @GET("Title")
+    Call<Movie> getSpecificMovie(
+            @Header(Constants.HEADLINES_COUNTRY) String country,
+            @Query("apiKey") String apiKey,
+            @Query("id") String id);
 }
