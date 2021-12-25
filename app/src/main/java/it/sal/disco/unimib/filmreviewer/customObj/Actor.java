@@ -45,4 +45,14 @@ public class Actor {
     public void setAsCharacter(String asCharacter) {
         this.asCharacter = asCharacter;
     }
+
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "id='" + id + '\'' +
+                ", image='" + image + '\'' +
+                ", name='" + name + '\'' +
+                ", asCharacter='" + asCharacter + '\'' +
+                '}';
+    }
 }

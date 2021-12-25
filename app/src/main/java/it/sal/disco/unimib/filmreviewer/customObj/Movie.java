@@ -37,6 +37,8 @@ public class Movie {
     private String countries;
     private String languages;
     private PosterBox posters;
+    private String metacriticRating;
+
 
 
 
@@ -46,7 +48,7 @@ public class Movie {
         this.desc = desc;
     }
 
-    public Movie(String id, int rank, String title, String fullTitle, String year, String image, String crew, String imDbRating, String imDbRatingCount, String description, String desc, String private_stars, String originalTitle, String type, String releaseDate, String runtimeStr, String plot, String plotLocal, String plotLocalIsRtl, String awards, String directors, String writers, String stars, List<Actor> actorList, String genres, String companies, String countries, String languages, PosterBox posterBox) {
+    public Movie(String id, int rank, String title, String fullTitle, String year, String image, String crew, String imDbRating, String imDbRatingCount, String description, String desc, String private_stars, String originalTitle, String type, String releaseDate, String runtimeStr, String plot, String plotLocal, String plotLocalIsRtl, String awards, String directors, String writers, String stars, List<Actor> actorList, String genres, String companies, String countries, String languages, PosterBox posters, String metacriticRating) {
         this.id = id;
         this.rank = rank;
         this.title = title;
@@ -75,7 +77,8 @@ public class Movie {
         this.companies = companies;
         this.countries = countries;
         this.languages = languages;
-        this.posters = posterBox;
+        this.posters = posters;
+        this.metacriticRating = metacriticRating;
     }
 
     public String getId() {
@@ -310,6 +313,14 @@ public class Movie {
         this.posters = posterBox;
     }
 
+    public String getMetacriticRating() {
+        return metacriticRating;
+    }
+
+    public void setMetacriticRating(String metacriticRating) {
+        this.metacriticRating = metacriticRating;
+    }
+
     //Personali
     public String getTitle2() {
         if(year!=null && !year.isEmpty()){
@@ -352,6 +363,7 @@ public class Movie {
                 ", countries='" + countries + '\'' +
                 ", languages='" + languages + '\'' +
                 ", posters=" + posters +
+                ", metacriticRating='" + metacriticRating + '\'' +
                 '}';
     }
 }

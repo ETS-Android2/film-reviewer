@@ -6,8 +6,8 @@ import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 
 public class Constants {
     public final static String API_BASE_URL = "https://imdb-api.com/en/API/";
-    public final static String API_KEY = "k_613gh8jx";
-    //public final static String API_KEY = "k_lkvlsrmu";
+    //public final static String API_KEY = "k_613gh8jx";
+    public final static String API_KEY = "k_lkvlsrmu";
     public final static String HEADLINES_COUNTRY = "en";
 
 

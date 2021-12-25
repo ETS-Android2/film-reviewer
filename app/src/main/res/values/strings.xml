@@ -9,10 +9,26 @@
 
     <string name="sample"></string>
     <string name="sample2">aaaaaaaaaaaaa</string>
+    <string name="sample_long">aaaaaaaaaaaaa   aaaaaaaa aaaaa aaaaa a a a  a a a a a aaaaaaaaaaaaaaaaaaaaa aaaaa aaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaa aaaaaa aaaaa aaaaaaaa</string>
     <string name="poster">Poster</string>
     <string name="submit">Submit</string>
     <string name="noMovies">Can\'t find any movie</string>
     <string name="Favourite">Favourite</string>
+    <string name="p_review">Personal Review: </string>
+    <string name="pointers">...</string>
+    <string name="releaseDate">Release Date:</string>
+    <string name="otherInform">Others Information: </string>
+    <string name="type">Type:  </string>
+    <string name="originalTitle">Original Title: </string>
+    <string name="duration">Runtime: </string>
+    <string name="awards">Main Awards: </string>
+    <string name="directors">Directors: </string>
+    <string name="genres">Genres: </string>
+    <string name="companies">Companies: </string>
+    <string name="countries">Countries: </string>
+    <string name="languages">Languages: </string>
+    <string name="imdbrating">Imdb Rating:</string>
+    <string name="metacriticRating">Metacritic:</string>
 
     <string-array name="array_discover">
         <item>MostPopularMovies</item>

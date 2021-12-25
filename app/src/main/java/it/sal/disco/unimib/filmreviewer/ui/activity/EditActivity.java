@@ -1,17 +1,15 @@
 package it.sal.disco.unimib.filmreviewer.ui.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -21,9 +19,10 @@ import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import it.sal.disco.unimib.filmreviewer.R;
+import it.sal.disco.unimib.filmreviewer.adapter.ActorsRecyclerViewAdatper;
+import it.sal.disco.unimib.filmreviewer.adapter.MoviesRecyclerViewAdapterAPI;
+import it.sal.disco.unimib.filmreviewer.customObj.Actor;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
-import it.sal.disco.unimib.filmreviewer.customObj.MoviesResponse;
-import it.sal.disco.unimib.filmreviewer.ui.fragment.discover.DiscoverViewModel;
 import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
 public class EditActivity extends AppCompatActivity {
@@ -77,10 +76,11 @@ public class EditActivity extends AppCompatActivity {
         fulltitleMovie.setText(currentMovie.getFullTitle());
 
         TextView relaseMovie = findViewById(R.id.movieRelaseDate);
-        relaseMovie.setText("Release: "+currentMovie.getReleaseDate());
+        relaseMovie.setText(currentMovie.getReleaseDate());
 
         TextView plotMovie = findViewById(R.id.moviePlot);
         plotMovie.setText(currentMovie.getPlot());
+
 
         ImageView imageMovie = findViewById(R.id.movieImage);
         //Check if there are posters
@@ -100,8 +100,76 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-        TextView lengMovie = findViewById(R.id.movieLanguages);
-        lengMovie.setText("Languages: "+currentMovie.getLanguages());
 
+        TextView typeMovie = findViewById(R.id.movieType);
+        typeMovie.setText(currentMovie.getType());
+
+        TextView runtimeMovie = findViewById(R.id.movieRuntime);
+        runtimeMovie.setText(currentMovie.getRuntimeStr());
+
+        TextView awardsMovie = findViewById(R.id.movieAwards);
+        awardsMovie.setText(currentMovie.getAwards());
+
+        TextView origTitleMovie = findViewById(R.id.movieOriginalTitle);
+        origTitleMovie.setText(currentMovie.getOriginalTitle());
+
+        TextView directorMovie = findViewById(R.id.movieDirectors);
+        directorMovie.setText(currentMovie.getDirectors());
+
+        TextView genreMovie = findViewById(R.id.movieGenres);
+        genreMovie.setText(currentMovie.getGenres());
+
+        TextView companiesMovie = findViewById(R.id.movieCompanies);
+        companiesMovie.setText(currentMovie.getCompanies());
+
+        TextView countriesMovie = findViewById(R.id.movieCountries);
+        countriesMovie.setText(currentMovie.getCountries());
+
+        TextView languagesMovie = findViewById(R.id.movieLanguages);
+        languagesMovie.setText(currentMovie.getLanguages());
+
+        ProgressBar imdb_bar = findViewById(R.id.progressBarIMDB);
+        imdb_bar.setMax(10);
+        try{
+
+            String aaa = currentMovie.getImDbRating();
+            double bbb = Double.parseDouble(aaa);
+            int ccc = (int) bbb;
+
+            imdb_bar.setProgress(ccc);
+        }catch(Exception e){}
+
+        ProgressBar metacritic = findViewById(R.id.progressBarMETACRITIC);
+        metacritic.setMax(100);
+        try{
+
+            String aaa = currentMovie.getMetacriticRating();
+            double bbb = Double.parseDouble(aaa);
+            int ccc = (int) bbb;
+
+            metacritic.setProgress(ccc);
+        }catch(Exception e){}
+
+
+        //RecyclerViewActors
+        RecyclerView mRecyclerView = findViewById(R.id.recyclerViewActors);
+        ActorsRecyclerViewAdatper RecyclerViewAdapter;
+        //CACHE RECYCLERVIEW
+        /*
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setItemViewCacheSize(35);
+        mRecyclerView.setDrawingCacheEnabled(true);
+        */
+        //FINE CACHE RECYCLERVIEW
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerViewAdapter = new ActorsRecyclerViewAdatper(currentMovie.getActorList(), new ActorsRecyclerViewAdatper.OnItemClickListener() {
+            @Override
+            public void onItemClick(Actor actor) {
+                Log.d(
+                        "EditActivity",
+                        "CLICKED RecycleView element " + actor.toString());
+            }
+        });
+        mRecyclerView.setAdapter(RecyclerViewAdapter);
     }
 }
