@@ -29,6 +29,8 @@
     <string name="languages">Languages: </string>
     <string name="imdbrating">Imdb Rating:</string>
     <string name="metacriticRating">Metacritic:</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
 
     <string-array name="array_discover">
         <item>MostPopularMovies</item>

@@ -3,12 +3,16 @@ package it.sal.disco.unimib.filmreviewer.ui.activity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -64,16 +68,36 @@ public class EditActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_edit, menu);
+        //return super.onCreateOptionsMenu(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.saveButton1){
+            Log.d("DEBUG", "SELEZIONATA SAVE");
+            return true;
+        }
+        if(item.getItemId() == R.id.deleteButton1){
+            Log.d("DEBUG", "SELEZIONATA DELETE");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void updateInfo(){
         //UI object-related
         TextView titleMovie = findViewById(R.id.movieTitle);
         titleMovie.setText(currentMovie.getTitle());
 
-        TextView fulltitleMovie = findViewById(R.id.movieFullTitle);
-        fulltitleMovie.setText(currentMovie.getFullTitle());
+        TextView fullTitleMovie = findViewById(R.id.movieFullTitle);
+        fullTitleMovie.setText(currentMovie.getFullTitle());
 
-        TextView relaseMovie = findViewById(R.id.movieRelaseDate);
-        relaseMovie.setText(currentMovie.getReleaseDate());
+        TextView releaseMovie = findViewById(R.id.movieRelaseDate);
+        releaseMovie.setText(currentMovie.getReleaseDate());
 
         TextView plotMovie = findViewById(R.id.moviePlot);
         plotMovie.setText(currentMovie.getPlot());
@@ -88,6 +112,7 @@ public class EditActivity extends AppCompatActivity {
             link1poster = "";
         }
         Picasso.get().load(link1poster).placeholder(R.drawable.ic_baseline_movie_filter_24).into(imageMovie);
+
 
         RatingBar ratingbarMovie = findViewById(R.id.ratingBar);
         ratingbarMovie.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -161,5 +186,11 @@ public class EditActivity extends AppCompatActivity {
             }
         });
         mRecyclerView.setAdapter(RecyclerViewAdapter);
+
+
+        //Toolbar
+        Toolbar toolbar_mia = findViewById(R.id.edit_toolbar);
+        toolbar_mia.setTitle(currentMovie.getTitle());
+        setSupportActionBar(toolbar_mia);
     }
 }

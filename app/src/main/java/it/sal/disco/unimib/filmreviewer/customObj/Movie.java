@@ -40,9 +40,6 @@ public class Movie {
     private String metacriticRating;
 
 
-
-
-
     public Movie(String title, String desc) {
         this.title = title;
         this.desc = desc;
