@@ -1,13 +1,6 @@
 package it.sal.disco.unimib.filmreviewer.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -15,15 +8,19 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import it.sal.disco.unimib.filmreviewer.R;
 import it.sal.disco.unimib.filmreviewer.adapter.ActorsRecyclerViewAdatper;
-import it.sal.disco.unimib.filmreviewer.adapter.MoviesRecyclerViewAdapterAPI;
 import it.sal.disco.unimib.filmreviewer.customObj.Actor;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
-import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -154,14 +151,7 @@ public class EditActivity extends AppCompatActivity {
         //RecyclerViewActors
         RecyclerView mRecyclerView = findViewById(R.id.recyclerViewActors);
         ActorsRecyclerViewAdatper RecyclerViewAdapter;
-        //CACHE RECYCLERVIEW
-        /*
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setItemViewCacheSize(35);
-        mRecyclerView.setDrawingCacheEnabled(true);
-        */
-        //FINE CACHE RECYCLERVIEW
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, currentMovie.getActorList().size()));
         RecyclerViewAdapter = new ActorsRecyclerViewAdatper(currentMovie.getActorList(), new ActorsRecyclerViewAdatper.OnItemClickListener() {
             @Override
             public void onItemClick(Actor actor) {

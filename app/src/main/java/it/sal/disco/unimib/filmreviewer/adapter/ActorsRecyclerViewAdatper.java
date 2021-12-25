@@ -15,6 +15,7 @@ import java.util.List;
 
 import it.sal.disco.unimib.filmreviewer.R;
 import it.sal.disco.unimib.filmreviewer.customObj.Actor;
+import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
 public class ActorsRecyclerViewAdatper extends RecyclerView.Adapter<ActorsRecyclerViewAdatper.ActorsRecyclerViewHolder>{
 
@@ -60,26 +61,19 @@ public class ActorsRecyclerViewAdatper extends RecyclerView.Adapter<ActorsRecycl
         }
 
         public void bind(Actor actor){
-            /*
-            //Text Setting
-            ((TextView) itemView.findViewById(R.id.tv_title))
-                    .setText(movie.getTitle());
-            ((TextView) itemView.findViewById(R.id.tv_desc))
-                    .setText(String.valueOf(movie.getTitle2()));
-
-            //Image Loading
-            String imageUri = Constants.getLittleImage(movie.getImage());
-            ImageView ivBasicImage = itemView.findViewById(R.id.tv_imgv);
-            int[] size = Constants.imagePosterSize(5);
+            ((TextView) itemView.findViewById(R.id.actorName))
+                    .setText(actor.getName());
+            //((TextView) itemView.findViewById(R.id.actorAs))
+            //        .setText(actor.getAsCharacter());
+            String imageUri = Constants.getLittleImage(actor.getImage());
+            ImageView ivBasicImage = itemView.findViewById(R.id.actorImage);
             Picasso.get()
                     .load(imageUri)
-                    .resize(size[0], size[1])
+                    .resize(120, 180)
                     .centerCrop()
                     .into(ivBasicImage);
 
-             */
-            ((TextView) itemView.findViewById(R.id.actorName))
-                    .setText(actor.getName());
+
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(actor));
         }
     }
