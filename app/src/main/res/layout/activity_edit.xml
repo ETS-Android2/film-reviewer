@@ -59,13 +59,13 @@
 
                     <TextView
                         android:id="@+id/movieTitle"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:padding="2dp"
                         android:text="@string/sample2"
-                        android:textSize="17sp"
-                        app:autoSizeTextType="uniform"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/movieImage"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,19 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:padding="2dp"
                         android:text="@string/releaseDate"
-                        app:layout_constraintStart_toEndOf="@+id/movieImage"
-                        app:layout_constraintTop_toBottomOf="@+id/movieFullTitle" />
-
-                    <TextView
-                        android:id="@+id/movieFullTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:padding="2dp"
-                        android:text="@string/sample2"
-                        app:autoSizeTextType="uniform"
                         app:layout_constraintStart_toEndOf="@+id/movieImage"
                         app:layout_constraintTop_toBottomOf="@+id/movieTitle" />
 
@@ -98,7 +86,9 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        tools:ignore="ImageContrastCheck"
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:id="@+id/movieRelaseDate"
@@ -106,7 +96,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_marginBottom="4dp"
-                        android:padding="2dp"
                         android:text="@string/sample2"
                         app:layout_constraintBottom_toBottomOf="@+id/movieRelaseDatePre"
                         app:layout_constraintStart_toEndOf="@+id/movieRelaseDatePre"

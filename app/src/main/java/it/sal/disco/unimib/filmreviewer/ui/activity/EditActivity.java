@@ -93,8 +93,9 @@ public class EditActivity extends AppCompatActivity {
         TextView titleMovie = findViewById(R.id.movieTitle);
         titleMovie.setText(currentMovie.getTitle());
 
+        /*
         TextView fullTitleMovie = findViewById(R.id.movieFullTitle);
-        fullTitleMovie.setText(currentMovie.getFullTitle());
+        fullTitleMovie.setText(currentMovie.getFullTitle());*/
 
         TextView releaseMovie = findViewById(R.id.movieRelaseDate);
         releaseMovie.setText(currentMovie.getReleaseDate());
