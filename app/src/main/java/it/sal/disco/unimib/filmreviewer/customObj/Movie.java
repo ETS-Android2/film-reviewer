@@ -1,9 +1,24 @@
 package it.sal.disco.unimib.filmreviewer.customObj;
 
+import androidx.annotation.NonNull;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+import androidx.versionedparcelable.ParcelField;
+
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
+import it.sal.disco.unimib.filmreviewer.utils.Converters;
+
+@Entity
 public class Movie {
     //Implementation 1
+    @PrimaryKey
+    @NonNull
     private String id;
     private int rank;
     private String title;
@@ -31,19 +46,16 @@ public class Movie {
     private String directors;
     private String writers;
     private String stars;
+    @SerializedName("actorList")
     private List<Actor> actorList;
     private String genres;
     private String companies;
     private String countries;
     private String languages;
+    @SerializedName("posters")
     private PosterBox posters;
     private String metacriticRating;
 
-
-    public Movie(String title, String desc) {
-        this.title = title;
-        this.desc = desc;
-    }
 
     public Movie(String id, int rank, String title, String fullTitle, String year, String image, String crew, String imDbRating, String imDbRatingCount, String description, String desc, String private_stars, String originalTitle, String type, String releaseDate, String runtimeStr, String plot, String plotLocal, String plotLocalIsRtl, String awards, String directors, String writers, String stars, List<Actor> actorList, String genres, String companies, String countries, String languages, PosterBox posters, String metacriticRating) {
         this.id = id;

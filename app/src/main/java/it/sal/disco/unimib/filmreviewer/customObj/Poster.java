@@ -8,6 +8,8 @@ public class Poster {
     private String width;
     private String height;
 
+    public Poster() {
+    }
 
     public Poster(String id, String link, String aspectRatio, String language, String width, String height) {
         this.id = id;

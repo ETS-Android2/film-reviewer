@@ -5,34 +5,38 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
+import it.sal.disco.unimib.filmreviewer.utils.Constants;
+import it.sal.disco.unimib.filmreviewer.utils.Converters;
 
 
 @Database(entities = {Movie.class}, version = 1)
+@TypeConverters({Converters.class})
 public abstract class MoviesRoomDatabase extends RoomDatabase {
-    /*
-    public abstract MoviesDao moviesDao();
+    public abstract MovieDao movieDao();
 
-    private static volatile NewsRoomDatabase INSTANCE;
+    private static volatile MoviesRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public static NewsRoomDatabase getDatabase(final Context context) {
+    public static MoviesRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (NewsRoomDatabase.class) {
+            synchronized (MoviesRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            NewsRoomDatabase.class, Constants.NEWS_DATABASE_NAME)
+                            MoviesRoomDatabase.class, Constants.NEWS_DATABASE_NAME)
+                            .addTypeConverter(new Converters())
                             .build();
                 }
             }
         }
         return INSTANCE;
     }
-     */
+
 }

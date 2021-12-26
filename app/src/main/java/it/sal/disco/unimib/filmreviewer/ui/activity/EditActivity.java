@@ -21,10 +21,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+import java.util.concurrent.Executors;
+
 import it.sal.disco.unimib.filmreviewer.R;
 import it.sal.disco.unimib.filmreviewer.adapter.ActorsRecyclerViewAdatper;
 import it.sal.disco.unimib.filmreviewer.customObj.Actor;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
+import it.sal.disco.unimib.filmreviewer.room.MovieDao;
+import it.sal.disco.unimib.filmreviewer.room.MoviesRoomDatabase;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -77,8 +82,18 @@ public class EditActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        MoviesRoomDatabase moviesRoomDatabase = MoviesRoomDatabase.getDatabase(getApplicationContext());
+        MovieDao mMoviesDao = moviesRoomDatabase.movieDao();
+
+
         if(item.getItemId() == R.id.saveButton1){
             Log.d("DEBUG", "SELEZIONATA SAVE");
+            Executors.newSingleThreadExecutor().execute(() -> {
+                //Log.d(TAG, "onResponse - getNewsOnlineInDB");
+                mMoviesDao.insertAll(currentMovie);
+            });
+            onBackPressed();
             return true;
         }
         if(item.getItemId() == R.id.deleteButton1){
@@ -193,5 +208,7 @@ public class EditActivity extends AppCompatActivity {
         Toolbar toolbar_mia = findViewById(R.id.edit_toolbar);
         toolbar_mia.setTitle(currentMovie.getTitle());
         setSupportActionBar(toolbar_mia);
+
+
     }
 }

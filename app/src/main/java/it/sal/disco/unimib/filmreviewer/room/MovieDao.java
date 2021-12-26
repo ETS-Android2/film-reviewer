@@ -11,8 +11,8 @@ import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 
 @Dao
 public interface MovieDao {
-    /*
-    @Query("SELECT * FROM movies")
+    /**/
+    @Query("SELECT * FROM movie")
     List<Movie> getAll();
 
     @Insert
@@ -24,9 +24,9 @@ public interface MovieDao {
     @Delete
     void delete(Movie movie);
 
-    @Query("DELETE FROM movies")
+    @Query("DELETE FROM movie")
     void deleteAll();
 
     @Delete
-    void deleteAllWithoutQuery(Movie... movie);*/
+    void deleteAllWithoutQuery(Movie... movie);
 }
