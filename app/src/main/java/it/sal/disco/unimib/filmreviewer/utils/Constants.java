@@ -8,8 +8,9 @@ public class Constants {
 
     //API
     //public final static String API_KEY = "k_613gh8jx";
-    //public final static String API_KEY = "k_lkvlsrmu";
-    public final static String API_KEY = "k_ay29tyqr";
+    public final static String API_KEY = "k_lkvlsrmu";
+
+    //public final static String API_KEY = "k_ay29tyqr";
     public final static String API_BASE_URL = "https://imdb-api.com/en/API/";
     public final static String HEADLINES_COUNTRY = "en";
     public final static int API_MAX_FOR_PAGE = 25;

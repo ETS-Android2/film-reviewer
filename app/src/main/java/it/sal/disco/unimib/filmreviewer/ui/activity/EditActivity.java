@@ -82,15 +82,12 @@ public class EditActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         MoviesRoomDatabase moviesRoomDatabase = MoviesRoomDatabase.getDatabase(getApplicationContext());
         MovieDao mMoviesDao = moviesRoomDatabase.movieDao();
-
 
         if(item.getItemId() == R.id.saveButton1){
             Log.d("DEBUG", "SELEZIONATA SAVE");
             Executors.newSingleThreadExecutor().execute(() -> {
-                //Log.d(TAG, "onResponse - getNewsOnlineInDB");
                 mMoviesDao.insertAll(currentMovie);
             });
             onBackPressed();
@@ -98,6 +95,10 @@ public class EditActivity extends AppCompatActivity {
         }
         if(item.getItemId() == R.id.deleteButton1){
             Log.d("DEBUG", "SELEZIONATA DELETE");
+            Executors.newSingleThreadExecutor().execute(() -> {
+                mMoviesDao.deleteSpecificMovie(currentMovie.getId());
+            });
+            onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);

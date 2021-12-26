@@ -29,4 +29,7 @@ public interface MovieDao {
 
     @Delete
     void deleteAllWithoutQuery(Movie... movie);
+
+    @Query("DELETE FROM movie WHERE id=:id_input")
+    void deleteSpecificMovie(String id_input);
 }
