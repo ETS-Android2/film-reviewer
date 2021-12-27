@@ -12,15 +12,12 @@ import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 
 @Dao
 public interface MovieDao {
-    /**/
+    //Not used
     @Query("SELECT * FROM movie")
     List<Movie> getAll();
 
     @Insert
     void insertNewsList(List<Movie> newsList);
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(Movie... movie);
 
     @Delete
     void delete(Movie movie);
@@ -31,6 +28,13 @@ public interface MovieDao {
     @Delete
     void deleteAllWithoutQuery(Movie... movie);
 
+    //Used
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(Movie... movie);
+
     @Query("DELETE FROM movie WHERE id=:id_input")
     void deleteSpecificMovie(String id_input);
+
+    @Query("SELECT * FROM movie WHERE id=:id_input")
+    Movie getMovieFromID(String id_input);
 }

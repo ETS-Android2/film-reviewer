@@ -26,7 +26,7 @@ public class EditActivityViewModel extends AndroidViewModel {
 
     public MutableLiveData<Movie> getSpecificMovies() {
         if(Constants.selectedMovie.getId() != null){
-            mMoviesResponseLiveData = mIMoviesRepository.getSelectedMovie(Constants.selectedMovie.getId());
+            mMoviesResponseLiveData = mIMoviesRepository.getMovieLocalOROnline(Constants.selectedMovie.getId());
         }
         return mMoviesResponseLiveData;
     }

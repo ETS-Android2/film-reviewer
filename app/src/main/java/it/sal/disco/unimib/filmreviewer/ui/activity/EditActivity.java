@@ -82,11 +82,9 @@ public class EditActivity extends AppCompatActivity {
                 .observe(this, observer);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_edit, menu);
-        //return super.onCreateOptionsMenu(menu);
         return true;
     }
 
@@ -103,7 +101,7 @@ public class EditActivity extends AppCompatActivity {
 
             Switch switchPersonal = findViewById(R.id.switch1);
             currentMovie.setPrivate_fav(switchPersonal.isChecked());
-            
+
             mEditViewModel.insertDBSpecificMovie(currentMovie);
             finish();
             return true;
@@ -212,5 +210,13 @@ public class EditActivity extends AppCompatActivity {
         });
         mRecyclerView.setAdapter(RecyclerViewAdapter);
 
+        EditText textPersonalRev = findViewById(R.id.TextPersonalReview);
+        textPersonalRev.setText(currentMovie.getPrivate_desc());
+
+        RatingBar ratingBarPersonal = findViewById(R.id.ratingBar);
+        ratingBarPersonal.setRating(currentMovie.getPrivate_stars());
+
+        Switch switchPersonal = findViewById(R.id.switch1);
+        switchPersonal.setChecked(currentMovie.isPrivate_fav());
     }
 }

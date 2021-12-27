@@ -38,45 +38,6 @@ public class MoviesRepository implements iMoviesRepository{
 
     //Functions for Discover&Search Fragment
     @Override
-    public MutableLiveData<Movie> getSelectedMovie(String id) {
-        mLiveDataMovie = new MutableLiveData<>();
-
-        //Retrofit initialization
-        Retrofit retrofit = new Retrofit
-                .Builder()
-                .baseUrl(Constants.API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ApiService mApiService = retrofit.create(ApiService.class);
-
-        //Callback
-        Call<Movie> movieResponseCall = mApiService
-                .getSpecificMovie(
-                        Constants.HEADLINES_COUNTRY,
-                        Constants.API_KEY,
-                        id,
-                        "Posters");
-        movieResponseCall.enqueue(new Callback<Movie>() {
-            @Override
-            public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {
-                Executors.newSingleThreadExecutor().execute(() -> {
-                    Log.d("DEBUG", "onResponse-getSelectedMovie");
-                    if(response.body() != null){
-                        Movie selected = response.body();
-                        mLiveDataMovie.postValue(selected);
-                    }else{
-                        Log.d("DEBUG", "onResponse-getSelectedMovie-errorResponse");
-                    }
-                });
-            }
-            @Override
-            public void onFailure(@NonNull Call<Movie> call, @NonNull Throwable t) {
-                Log.d("DEBUG", "onFailure-getNewsOnlineInDB-"+t.toString());
-            }});
-        return mLiveDataMovie;
-    }
-
-    @Override
     public MutableLiveData<MoviesResponse> getMovies(int selector, String opz_param) {
         mLiveData = new MutableLiveData<>();
         Call<MoviesResponse> moviesResponseCall = getCorrectApiService(selector, opz_param);
@@ -154,6 +115,7 @@ public class MoviesRepository implements iMoviesRepository{
     }
 
     //Functions for EditActivity
+
     public void insertDBSpecificMovie(Movie movie_input){
         Executors.newSingleThreadExecutor().execute(() -> {
             mMoviesDao.insertAll(movie_input);
@@ -165,4 +127,56 @@ public class MoviesRepository implements iMoviesRepository{
             mMoviesDao.deleteSpecificMovie(movie_id);
         });
     }
+
+    @Override
+    public MutableLiveData<Movie> getMovieLocalOROnline(String id) {
+        mLiveDataMovie = new MutableLiveData<>();
+        Executors.newSingleThreadExecutor().execute(() -> {
+            Movie movie_query = mMoviesDao.getMovieFromID(id);
+            Log.d("DEBUG", "CALL LOCAL DB");
+
+            if(movie_query == null){
+                Log.d("DEBUG", "movie_query is == null");
+
+                //Retrofit initialization
+                Retrofit retrofit = new Retrofit
+                        .Builder()
+                        .baseUrl(Constants.API_BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                ApiService mApiService = retrofit.create(ApiService.class);
+
+                //Callback
+                Call<Movie> movieResponseCall = mApiService
+                        .getSpecificMovie(
+                                Constants.HEADLINES_COUNTRY,
+                                Constants.API_KEY,
+                                id,
+                                "Posters");
+                movieResponseCall.enqueue(new Callback<Movie>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {
+                        Executors.newSingleThreadExecutor().execute(() -> {
+                            Log.d("DEBUG", "onResponse-getSelectedMovie");
+                            if(response.body() != null){
+                                Movie selected = response.body();
+                                mLiveDataMovie.postValue(selected);
+                            }else{
+                                Log.d("DEBUG", "onResponse-getSelectedMovie-errorResponse");
+                            }
+                        });
+                    }
+                    @Override
+                    public void onFailure(@NonNull Call<Movie> call, @NonNull Throwable t) {
+                        Log.d("DEBUG", "onFailure-getSelectedMovie"+t.toString());
+                    }});
+            }else{
+                Log.d("DEBUG", "movie_query is != null");
+                mLiveDataMovie.postValue(movie_query);
+            }
+        });
+        return mLiveDataMovie;
+    }
+
+
 }
