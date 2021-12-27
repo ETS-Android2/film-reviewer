@@ -34,9 +34,7 @@ public class SearchFragment extends Fragment {
     private List<Movie> moviesList;
     private MoviesRecyclerViewAdapterAPI RecyclerViewAdapter;
     private SearchViewModel mSearchViewModel;
-
     public SearchFragment() {}
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,21 +49,12 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         View this_view = inflater.inflate(R.layout.fragment_search, container, false);
 
-
         //ProgressBar
         ProgressBar pgrbar = this_view.findViewById(R.id.search_progressBar);
         pgrbar.setVisibility(View.INVISIBLE);
 
-
         //RecyclerView
         RecyclerView mRecyclerView = this_view.findViewById(R.id.search_recycler_view);
-        //CACHE RECYCLERVIEW
-        /*
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setItemViewCacheSize(35);
-        mRecyclerView.setDrawingCacheEnabled(true);
-        */
-        //FINE CACHE RECYCLERVIEW
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         RecyclerViewAdapter =
                 new MoviesRecyclerViewAdapterAPI(this.moviesList, new MoviesRecyclerViewAdapterAPI.OnItemClickListener() {
@@ -85,8 +74,6 @@ public class SearchFragment extends Fragment {
                     }
                 });
         mRecyclerView.setAdapter(RecyclerViewAdapter);
-
-
 
         //Observer for when View model change state
         @SuppressLint("NotifyDataSetChanged")
@@ -109,8 +96,6 @@ public class SearchFragment extends Fragment {
             }
         };
 
-
-
         //Button & SearchView
         SearchView searchView = this_view.findViewById(R.id.search_search);
         Button searchButton = this_view.findViewById(R.id.button_search);
@@ -120,8 +105,6 @@ public class SearchFragment extends Fragment {
             mSearchViewModel.getMovies(99, query)
                     .observe(getViewLifecycleOwner(), observer);
         });
-
-
 
         return this_view;
     }

@@ -18,7 +18,6 @@ public class Constants {
     //DB
     public final static String NEWS_DATABASE_NAME = "movies_db";
 
-
     //Utility global functions
     public static String getLittleImage(String inputUrl){
         return inputUrl;
@@ -32,4 +31,11 @@ public class Constants {
 
     //Use ONLY to pass the id, the consistency is not guaranteed for this object
     public static Movie selectedMovie = null;
+
+    //CACHE RECYCLERVIEW
+    /*
+    mRecyclerView.setHasFixedSize(true);
+    mRecyclerView.setItemViewCacheSize(35);
+    mRecyclerView.setDrawingCacheEnabled(true);
+    */
 }

@@ -75,7 +75,6 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
                     .resize(size[0], size[1])
                     .centerCrop()
                     .into(ivBasicImage);
-
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(movie));
         }
     }

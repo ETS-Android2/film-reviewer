@@ -63,8 +63,6 @@ public class ActorsRecyclerViewAdatper extends RecyclerView.Adapter<ActorsRecycl
         public void bind(Actor actor){
             ((TextView) itemView.findViewById(R.id.actorName))
                     .setText(actor.getName());
-            //((TextView) itemView.findViewById(R.id.actorAs))
-            //        .setText(actor.getAsCharacter());
             String imageUri = Constants.getLittleImage(actor.getImage());
             ImageView ivBasicImage = itemView.findViewById(R.id.actorImage);
             Picasso.get()
@@ -72,8 +70,6 @@ public class ActorsRecyclerViewAdatper extends RecyclerView.Adapter<ActorsRecycl
                     .resize(120, 180)
                     .centerCrop()
                     .into(ivBasicImage);
-
-
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(actor));
         }
     }

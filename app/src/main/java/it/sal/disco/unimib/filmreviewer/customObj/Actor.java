@@ -6,9 +6,6 @@ public class Actor {
     private String name;
     private String asCharacter;
 
-    public Actor() {
-    }
-
     public Actor(String id, String image, String name, String asCharacter) {
         this.id = id;
         this.image = image;

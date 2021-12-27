@@ -43,7 +43,7 @@ public class MoviesRepository implements iMoviesRepository{
                 .build();
         ApiService mApiService = retrofit.create(ApiService.class);
 
-        //Other
+        //Callback
         Call<Movie> movieResponseCall = mApiService
                 .getSpecificMovie(
                         Constants.HEADLINES_COUNTRY,

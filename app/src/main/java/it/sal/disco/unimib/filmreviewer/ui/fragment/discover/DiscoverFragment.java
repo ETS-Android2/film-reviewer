@@ -57,8 +57,6 @@ public class DiscoverFragment extends Fragment {
                              Bundle savedInstanceState) {
         View this_view = inflater.inflate(R.layout.fragment_discover, container, false);
 
-
-
         //Spinner
         Spinner mSpinnerDiscovery = this_view.findViewById(R.id.spinner_discover);
         mSpinnerDiscovery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -72,28 +70,15 @@ public class DiscoverFragment extends Fragment {
             }
         });
 
-
-
         //Clear
         moviesList.clear();
-
-
 
         //ProgressBar
         ProgressBar pgrbar = this_view.findViewById(R.id.discover_progressBar);
         pgrbar.setVisibility(View.INVISIBLE);
 
-
-
         //RecyclerView
         RecyclerView mRecyclerView = this_view.findViewById(R.id.discover_recycler_view);
-        //CACHE RECYCLERVIEW
-        /*
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setItemViewCacheSize(35);
-        mRecyclerView.setDrawingCacheEnabled(true);
-        */
-        //FINE CACHE RECYCLERVIEW
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         RecyclerViewAdapter =
                 new MoviesRecyclerViewAdapterAPI(this.moviesList, new MoviesRecyclerViewAdapterAPI.OnItemClickListener() {
@@ -114,8 +99,6 @@ public class DiscoverFragment extends Fragment {
                 });
         mRecyclerView.setAdapter(RecyclerViewAdapter);
 
-
-
         //Observer for when View model change state
         @SuppressLint("NotifyDataSetChanged")
         Observer<MoviesResponse> observer = moviesResponse -> {
@@ -132,13 +115,10 @@ public class DiscoverFragment extends Fragment {
                     for(int i=0; i<Constants.API_MAX_FOR_PAGE && i<moviesResponse.getMoviesList().size(); i++){
                         moviesList.add(moviesResponse.getMoviesList().get(i));
                     }
-                    //moviesList.addAll(moviesResponse.getMoviesList());
                     RecyclerViewAdapter.notifyDataSetChanged();
                 }
             }
         };
-
-
 
         //Button
         Button discoveryButton = this_view.findViewById(R.id.button_discover);

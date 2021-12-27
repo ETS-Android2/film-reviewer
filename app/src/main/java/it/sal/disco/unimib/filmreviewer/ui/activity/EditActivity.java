@@ -28,6 +28,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 
 import it.sal.disco.unimib.filmreviewer.R;
@@ -53,9 +54,9 @@ public class EditActivity extends AppCompatActivity {
         Toolbar toolbar_mia = findViewById(R.id.edit_toolbar);
         toolbar_mia.setTitle(R.string.editing);
         setSupportActionBar(toolbar_mia);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        //ProgressBar /**/
+        //ProgressBar
         View scv432 = findViewById(R.id.scv432);
         scv432.setVisibility(View.INVISIBLE);
         ProgressBar progressBarEditing = findViewById(R.id.progressBarEditing);
@@ -95,22 +96,17 @@ public class EditActivity extends AppCompatActivity {
         MovieDao mMoviesDao = moviesRoomDatabase.movieDao();
 
         if(item.getItemId() == R.id.saveButton1){
-            Log.d("DEBUG", "SELEZIONATA SAVE");
-            //Extra Save
+            Log.d("DEBUG", "Selected SAVE");
 
-            //1
             EditText textPersonalRev = findViewById(R.id.TextPersonalReview);
             currentMovie.setPrivate_desc(textPersonalRev.getText().toString());
 
-            //2
             RatingBar ratingBarPersonal = findViewById(R.id.ratingBar);
             currentMovie.setPrivate_stars(ratingBarPersonal.getRating());
 
-            //3
             Switch switchPersonal = findViewById(R.id.switch1);
             currentMovie.setPrivate_fav(switchPersonal.isChecked());
 
-            //Execution query
             Executors.newSingleThreadExecutor().execute(() -> {
                 mMoviesDao.insertAll(currentMovie);
             });
@@ -118,7 +114,7 @@ public class EditActivity extends AppCompatActivity {
             return true;
         }
         if(item.getItemId() == R.id.deleteButton1){
-            Log.d("DEBUG", "SELEZIONATA DELETE");
+            Log.d("DEBUG", "Selected DELETE");
             Executors.newSingleThreadExecutor().execute(() -> {
                 mMoviesDao.deleteSpecificMovie(currentMovie.getId());
             });
@@ -126,7 +122,7 @@ public class EditActivity extends AppCompatActivity {
             return true;
         }
         if(item.getItemId() == android.R.id.home){
-            Log.d("DEBUG", "SELEZIONATA BACK");
+            Log.d("DEBUG", "Selected BACK");
             finish();
             //onBackPressed();
             return true;
@@ -135,7 +131,6 @@ public class EditActivity extends AppCompatActivity {
     }
 
     private void updateInfo(){
-        //UI object-related
         TextView titleMovie = findViewById(R.id.movieTitle);
         titleMovie.setText(currentMovie.getTitle());
 
@@ -158,7 +153,7 @@ public class EditActivity extends AppCompatActivity {
         ratingbarMovie.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                Log.d("XXXX", String.valueOf(rating));
+                Log.d("DEBUG", "Stars Changed to: "+String.valueOf(rating));
             }
         });
 
@@ -211,7 +206,6 @@ public class EditActivity extends AppCompatActivity {
             metacritic.setProgress(ccc);
         }catch(Exception e){}
 
-        //RecyclerViewActors
         RecyclerView mRecyclerView = findViewById(R.id.recyclerViewActors);
         ActorsRecyclerViewAdatper RecyclerViewAdapter;
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, currentMovie.getActorList().size()));
