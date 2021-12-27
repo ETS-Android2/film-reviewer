@@ -1,18 +1,24 @@
 package it.sal.disco.unimib.filmreviewer.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -34,9 +40,7 @@ import it.sal.disco.unimib.filmreviewer.room.MoviesRoomDatabase;
 public class EditActivity extends AppCompatActivity {
 
     private EditActivityViewModel mEditViewModel;
-    private Movie currentMovie; //sostituto di moviesList
-    private String oldImage;
-
+    private Movie currentMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +49,23 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
         mEditViewModel = new ViewModelProvider(this).get(EditActivityViewModel.class);
 
+        //Toolbar
+        Toolbar toolbar_mia = findViewById(R.id.edit_toolbar);
+        toolbar_mia.setTitle(R.string.editing);
+        setSupportActionBar(toolbar_mia);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*
-        //ProgressBar
-        ProgressBar pgrbar = this_view.findViewById(R.id.discover_progressBar);
-        pgrbar.setVisibility(View.INVISIBLE);
-        */
-
+        //ProgressBar /**/
+        View scv432 = findViewById(R.id.scv432);
+        scv432.setVisibility(View.INVISIBLE);
+        ProgressBar progressBarEditing = findViewById(R.id.progressBarEditing);
+        progressBarEditing.setVisibility(View.VISIBLE);
 
         //Observer
         @SuppressLint("NotifyDataSetChanged")
         Observer<Movie> observer = movie -> {
-            //pgrbar.setVisibility(View.INVISIBLE);
+            progressBarEditing.setVisibility(View.INVISIBLE);
+            scv432.setVisibility(View.VISIBLE);
             if (movie == null) {
                 Snackbar.make(
                         this.findViewById(android.R.id.content),
@@ -87,10 +96,25 @@ public class EditActivity extends AppCompatActivity {
 
         if(item.getItemId() == R.id.saveButton1){
             Log.d("DEBUG", "SELEZIONATA SAVE");
+            //Extra Save
+
+            //1
+            EditText textPersonalRev = findViewById(R.id.TextPersonalReview);
+            currentMovie.setPrivate_desc(textPersonalRev.getText().toString());
+
+            //2
+            RatingBar ratingBarPersonal = findViewById(R.id.ratingBar);
+            currentMovie.setPrivate_stars(ratingBarPersonal.getRating());
+
+            //3
+            Switch switchPersonal = findViewById(R.id.switch1);
+            currentMovie.setPrivate_fav(switchPersonal.isChecked());
+
+            //Execution query
             Executors.newSingleThreadExecutor().execute(() -> {
                 mMoviesDao.insertAll(currentMovie);
             });
-            onBackPressed();
+            finish();
             return true;
         }
         if(item.getItemId() == R.id.deleteButton1){
@@ -98,7 +122,13 @@ public class EditActivity extends AppCompatActivity {
             Executors.newSingleThreadExecutor().execute(() -> {
                 mMoviesDao.deleteSpecificMovie(currentMovie.getId());
             });
-            onBackPressed();
+            finish();
+            return true;
+        }
+        if(item.getItemId() == android.R.id.home){
+            Log.d("DEBUG", "SELEZIONATA BACK");
+            finish();
+            //onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -109,19 +139,13 @@ public class EditActivity extends AppCompatActivity {
         TextView titleMovie = findViewById(R.id.movieTitle);
         titleMovie.setText(currentMovie.getTitle());
 
-        /*
-        TextView fullTitleMovie = findViewById(R.id.movieFullTitle);
-        fullTitleMovie.setText(currentMovie.getFullTitle());*/
-
         TextView releaseMovie = findViewById(R.id.movieRelaseDate);
         releaseMovie.setText(currentMovie.getReleaseDate());
 
         TextView plotMovie = findViewById(R.id.moviePlot);
         plotMovie.setText(currentMovie.getPlot());
 
-
         ImageView imageMovie = findViewById(R.id.movieImage);
-        //Check if there are posters
         String link1poster;
         if(currentMovie.getPosters().getPosters().size() > 0){
             link1poster = currentMovie.getPosters().getPosters().get(0).getLink();
@@ -130,7 +154,6 @@ public class EditActivity extends AppCompatActivity {
         }
         Picasso.get().load(link1poster).placeholder(R.drawable.ic_baseline_movie_filter_24).into(imageMovie);
 
-
         RatingBar ratingbarMovie = findViewById(R.id.ratingBar);
         ratingbarMovie.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -138,7 +161,6 @@ public class EditActivity extends AppCompatActivity {
                 Log.d("XXXX", String.valueOf(rating));
             }
         });
-
 
         TextView typeMovie = findViewById(R.id.movieType);
         typeMovie.setText(currentMovie.getType());
@@ -189,7 +211,6 @@ public class EditActivity extends AppCompatActivity {
             metacritic.setProgress(ccc);
         }catch(Exception e){}
 
-
         //RecyclerViewActors
         RecyclerView mRecyclerView = findViewById(R.id.recyclerViewActors);
         ActorsRecyclerViewAdatper RecyclerViewAdapter;
@@ -203,13 +224,6 @@ public class EditActivity extends AppCompatActivity {
             }
         });
         mRecyclerView.setAdapter(RecyclerViewAdapter);
-
-
-        //Toolbar
-        Toolbar toolbar_mia = findViewById(R.id.edit_toolbar);
-        toolbar_mia.setTitle(currentMovie.getTitle());
-        setSupportActionBar(toolbar_mia);
-
 
     }
 }

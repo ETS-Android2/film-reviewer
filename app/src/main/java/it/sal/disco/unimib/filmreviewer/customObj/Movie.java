@@ -32,7 +32,11 @@ public class Movie {
     //Implementation 2
     private String description;
     private String desc;
-    private String private_stars;
+
+    //Implementation P
+    private float private_stars;
+    private String private_desc;
+    private boolean private_fav;
 
     //Implementation 3
     private String originalTitle;
@@ -57,7 +61,7 @@ public class Movie {
     private String metacriticRating;
 
 
-    public Movie(String id, int rank, String title, String fullTitle, String year, String image, String crew, String imDbRating, String imDbRatingCount, String description, String desc, String private_stars, String originalTitle, String type, String releaseDate, String runtimeStr, String plot, String plotLocal, String plotLocalIsRtl, String awards, String directors, String writers, String stars, List<Actor> actorList, String genres, String companies, String countries, String languages, PosterBox posters, String metacriticRating) {
+    public Movie(@NonNull String id, int rank, String title, String fullTitle, String year, String image, String crew, String imDbRating, String imDbRatingCount, String description, String desc, float private_stars, String private_desc, boolean private_fav, String originalTitle, String type, String releaseDate, String runtimeStr, String plot, String plotLocal, String plotLocalIsRtl, String awards, String directors, String writers, String stars, List<Actor> actorList, String genres, String companies, String countries, String languages, PosterBox posters, String metacriticRating) {
         this.id = id;
         this.rank = rank;
         this.title = title;
@@ -70,6 +74,8 @@ public class Movie {
         this.description = description;
         this.desc = desc;
         this.private_stars = private_stars;
+        this.private_desc = private_desc;
+        this.private_fav = private_fav;
         this.originalTitle = originalTitle;
         this.type = type;
         this.releaseDate = releaseDate;
@@ -176,14 +182,6 @@ public class Movie {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public String getPrivate_stars() {
-        return private_stars;
-    }
-
-    public void setPrivate_stars(String private_stars) {
-        this.private_stars = private_stars;
     }
 
     public String getOriginalTitle() {
@@ -330,6 +328,30 @@ public class Movie {
         this.metacriticRating = metacriticRating;
     }
 
+    public String getPrivate_desc() {
+        return private_desc;
+    }
+
+    public void setPrivate_desc(String private_desc) {
+        this.private_desc = private_desc;
+    }
+
+    public void setPrivate_stars(float private_stars) {
+        this.private_stars = private_stars;
+    }
+
+    public float getPrivate_stars() {
+        return private_stars;
+    }
+
+    public boolean isPrivate_fav() {
+        return private_fav;
+    }
+
+    public void setPrivate_fav(boolean private_fav) {
+        this.private_fav = private_fav;
+    }
+
     //Personali
     public String getTitle2() {
         if(year!=null && !year.isEmpty()){
@@ -354,7 +376,9 @@ public class Movie {
                 ", imDbRatingCount='" + imDbRatingCount + '\'' +
                 ", description='" + description + '\'' +
                 ", desc='" + desc + '\'' +
-                ", private_stars='" + private_stars + '\'' +
+                ", private_stars=" + private_stars +
+                ", private_desc='" + private_desc + '\'' +
+                ", private_fav=" + private_fav +
                 ", originalTitle='" + originalTitle + '\'' +
                 ", type='" + type + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +

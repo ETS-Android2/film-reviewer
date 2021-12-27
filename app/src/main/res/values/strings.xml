@@ -8,7 +8,7 @@
     <string name="search">Search</string>
 
     <string name="sample"></string>
-    <string name="sample2">aaaaaaaaaaaaa</string>
+    <string name="sample2">sample</string>
     <string name="sample_long">aaaaaaaaaaaaa   aaaaaaaa aaaaa aaaaa a a a  a a a a a aaaaaaaaaaaaaaaaaaaaa aaaaa aaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaa aaaaaa aaaaa aaaaaaaa</string>
     <string name="poster">Poster</string>
     <string name="submit">Submit</string>
@@ -31,6 +31,7 @@
     <string name="metacriticRating">Metacritic:</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
+    <string name="editing">Editing...</string>
 
     <string-array name="array_discover">
         <item>MostPopularMovies</item>
