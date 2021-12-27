@@ -92,9 +92,6 @@ public class EditActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        MoviesRoomDatabase moviesRoomDatabase = MoviesRoomDatabase.getDatabase(getApplicationContext());
-        MovieDao mMoviesDao = moviesRoomDatabase.movieDao();
-
         if(item.getItemId() == R.id.saveButton1){
             Log.d("DEBUG", "Selected SAVE");
 
@@ -106,18 +103,14 @@ public class EditActivity extends AppCompatActivity {
 
             Switch switchPersonal = findViewById(R.id.switch1);
             currentMovie.setPrivate_fav(switchPersonal.isChecked());
-
-            Executors.newSingleThreadExecutor().execute(() -> {
-                mMoviesDao.insertAll(currentMovie);
-            });
+            
+            mEditViewModel.insertDBSpecificMovie(currentMovie);
             finish();
             return true;
         }
         if(item.getItemId() == R.id.deleteButton1){
             Log.d("DEBUG", "Selected DELETE");
-            Executors.newSingleThreadExecutor().execute(() -> {
-                mMoviesDao.deleteSpecificMovie(currentMovie.getId());
-            });
+            mEditViewModel.deleteDBSpecificMovie(currentMovie.getId());
             finish();
             return true;
         }

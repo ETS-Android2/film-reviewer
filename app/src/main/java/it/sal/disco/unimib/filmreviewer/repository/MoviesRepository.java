@@ -12,6 +12,8 @@ import java.util.concurrent.Executors;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 import it.sal.disco.unimib.filmreviewer.customObj.MoviesResponse;
 import it.sal.disco.unimib.filmreviewer.retrofit.ApiService;
+import it.sal.disco.unimib.filmreviewer.room.MovieDao;
+import it.sal.disco.unimib.filmreviewer.room.MoviesRoomDatabase;
 import it.sal.disco.unimib.filmreviewer.utils.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MoviesRepository implements iMoviesRepository{
     private Application mApplication;
-    //private final NewsDao mNewsDao;
+    private MovieDao mMoviesDao;
     private MutableLiveData<MoviesResponse> mLiveData;
     private MutableLiveData<Movie> mLiveDataMovie;
     //private final MoviesRepository reference_to_repository = this;
@@ -29,8 +31,12 @@ public class MoviesRepository implements iMoviesRepository{
     public MoviesRepository(Application mApplication){
         this.mApplication = mApplication;
         this.mLiveData = new MutableLiveData<>();
+        MoviesRoomDatabase moviesRoomDatabase =
+                MoviesRoomDatabase.getDatabase(mApplication.getApplicationContext());
+        this.mMoviesDao = moviesRoomDatabase.movieDao();
     }
 
+    //Functions for Discover&Search Fragment
     @Override
     public MutableLiveData<Movie> getSelectedMovie(String id) {
         mLiveDataMovie = new MutableLiveData<>();
@@ -70,7 +76,6 @@ public class MoviesRepository implements iMoviesRepository{
         return mLiveDataMovie;
     }
 
-
     @Override
     public MutableLiveData<MoviesResponse> getMovies(int selector, String opz_param) {
         mLiveData = new MutableLiveData<>();
@@ -94,7 +99,6 @@ public class MoviesRepository implements iMoviesRepository{
             }});
         return mLiveData;
     }
-
 
     public static Call<MoviesResponse> getCorrectApiService(int input, String opz_param){
         Retrofit retrofit = new Retrofit
@@ -147,5 +151,18 @@ public class MoviesRepository implements iMoviesRepository{
         }
 
         return MoviesResponseCall;
+    }
+
+    //Functions for EditActivity
+    public void insertDBSpecificMovie(Movie movie_input){
+        Executors.newSingleThreadExecutor().execute(() -> {
+            mMoviesDao.insertAll(movie_input);
+        });
+    }
+
+    public void deleteDBSpecificMovie(String movie_id){
+        Executors.newSingleThreadExecutor().execute(() -> {
+            mMoviesDao.deleteSpecificMovie(movie_id);
+        });
     }
 }

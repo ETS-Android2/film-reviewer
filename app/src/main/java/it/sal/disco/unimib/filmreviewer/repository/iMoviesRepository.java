@@ -8,4 +8,6 @@ import it.sal.disco.unimib.filmreviewer.customObj.MoviesResponse;
 public interface iMoviesRepository {
     MutableLiveData<MoviesResponse> getMovies(int selector, String opz_param);
     MutableLiveData<Movie> getSelectedMovie(String id);
+    void insertDBSpecificMovie(Movie movie_input);
+    void deleteDBSpecificMovie(String movie_id);
 }
