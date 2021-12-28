@@ -35,6 +35,10 @@ public class BookmarksFragment extends Fragment {
         ImageView ivBasicImage = view1.findViewById(R.id.imgv_test_bookmarks);
         Picasso.get().load(imageUri).into(ivBasicImage);
 
+        String imageUri2 = "https://imdb-api.com/posters/original/pbHpZfjzF4hKomaSmSZWRWKhO0P.jpg";
+        ImageView ivBasicImage2 = view1.findViewById(R.id.img2);
+        Picasso.get().load(imageUri2).into(ivBasicImage2);
+
         return view1;
     }
 }
