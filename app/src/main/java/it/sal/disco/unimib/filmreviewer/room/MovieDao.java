@@ -13,9 +13,6 @@ import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 @Dao
 public interface MovieDao {
     //Not used
-    @Query("SELECT * FROM movie")
-    List<Movie> getAll();
-
     @Insert
     void insertNewsList(List<Movie> newsList);
 
@@ -37,4 +34,7 @@ public interface MovieDao {
 
     @Query("SELECT * FROM movie WHERE id=:id_input")
     Movie getMovieFromID(String id_input);
+
+    @Query("SELECT * FROM movie")
+    List<Movie> getAll();
 }

@@ -26,7 +26,6 @@ public class MoviesRepository implements iMoviesRepository{
     private MovieDao mMoviesDao;
     private MutableLiveData<MoviesResponse> mLiveData;
     private MutableLiveData<Movie> mLiveDataMovie;
-    //private final MoviesRepository reference_to_repository = this;
 
     public MoviesRepository(Application mApplication){
         this.mApplication = mApplication;
@@ -115,7 +114,6 @@ public class MoviesRepository implements iMoviesRepository{
     }
 
     //Functions for EditActivity
-
     public void insertDBSpecificMovie(Movie movie_input){
         Executors.newSingleThreadExecutor().execute(() -> {
             mMoviesDao.insertAll(movie_input);
@@ -178,5 +176,15 @@ public class MoviesRepository implements iMoviesRepository{
         return mLiveDataMovie;
     }
 
-
+    //Functions for Collection&Favourite Fragment
+    @Override
+    public MutableLiveData<MoviesResponse> getLocalMovies() {
+        mLiveData = new MutableLiveData<>();
+        Executors.newSingleThreadExecutor().execute(() -> {
+            Log.d("DEBUG", "getLocalMovies");
+            MoviesResponse movie_response= new MoviesResponse(mMoviesDao.getAll());
+            mLiveData.postValue(movie_response);
+        });
+        return mLiveData;
+    }
 }

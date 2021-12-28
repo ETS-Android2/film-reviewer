@@ -3,13 +3,6 @@ package it.sal.disco.unimib.filmreviewer.ui.fragment.discover;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +12,16 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 import it.sal.disco.unimib.filmreviewer.R;
 import it.sal.disco.unimib.filmreviewer.adapter.MoviesRecyclerViewAdapterAPI;
@@ -40,9 +38,7 @@ public class DiscoverFragment extends Fragment {
     private DiscoverViewModel mDiscoverViewModel;
     private int selected_index;
 
-    public DiscoverFragment() {
-        // Required empty public constructor
-    }
+    public DiscoverFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

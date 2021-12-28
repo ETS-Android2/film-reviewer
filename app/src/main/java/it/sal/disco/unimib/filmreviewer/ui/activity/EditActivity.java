@@ -37,6 +37,7 @@ import it.sal.disco.unimib.filmreviewer.customObj.Actor;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 import it.sal.disco.unimib.filmreviewer.room.MovieDao;
 import it.sal.disco.unimib.filmreviewer.room.MoviesRoomDatabase;
+import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -138,7 +139,12 @@ public class EditActivity extends AppCompatActivity {
         }else{
             link1poster = "";
         }
-        Picasso.get().load(link1poster).placeholder(R.drawable.ic_baseline_movie_filter_24).into(imageMovie);
+        int[] size = Constants.imagePosterSize(6);
+        Picasso.get()
+                .load(link1poster)
+                .placeholder(R.drawable.ic_baseline_movie_filter_24)
+                .resize(size[0], size[1])
+                .into(imageMovie);
 
         RatingBar ratingbarMovie = findViewById(R.id.ratingBar);
         ratingbarMovie.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
