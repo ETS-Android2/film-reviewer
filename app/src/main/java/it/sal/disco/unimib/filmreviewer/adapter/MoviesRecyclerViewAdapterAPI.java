@@ -9,8 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 import it.sal.disco.unimib.filmreviewer.R;
@@ -69,12 +67,7 @@ public class MoviesRecyclerViewAdapterAPI extends RecyclerView.Adapter<MoviesRec
             //Image Loading
             String imageUri = Constants.getLittleImage(movie.getImage());
             ImageView ivBasicImage = itemView.findViewById(R.id.tv_imgv);
-            int[] size = Constants.imagePosterSize(5);
-            Picasso.get()
-                    .load(imageUri)
-                    .resize(size[0], size[1])
-                    .centerCrop()
-                    .into(ivBasicImage);
+            Constants.showImage(5, itemView, imageUri, ivBasicImage);
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(movie));
         }
     }

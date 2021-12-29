@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -65,11 +64,7 @@ public class ActorsRecyclerViewAdatper extends RecyclerView.Adapter<ActorsRecycl
                     .setText(actor.getName());
             String imageUri = Constants.getLittleImage(actor.getImage());
             ImageView ivBasicImage = itemView.findViewById(R.id.actorImage);
-            Picasso.get()
-                    .load(imageUri)
-                    .resize(120, 180)
-                    .centerCrop()
-                    .into(ivBasicImage);
+            Constants.showImage(5, itemView, imageUri, ivBasicImage);
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(actor));
         }
     }

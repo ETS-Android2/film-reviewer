@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 import it.sal.disco.unimib.filmreviewer.R;
@@ -69,12 +69,7 @@ public class MoviesRecyclerViewAdapterLocal extends RecyclerView.Adapter<MoviesR
                 link1poster = "";
             }
             ImageView ivBasicImage = itemView.findViewById(R.id.local_img);
-            int[] size = Constants.imagePosterSize(4);
-            Picasso.get()
-                    .load(link1poster)
-                    .resize(size[0], size[1])
-                    .centerCrop()
-                    .into(ivBasicImage);
+            Constants.showImage(10, itemView, link1poster, ivBasicImage);
             itemView.setOnClickListener(v -> onItemClickListener.onItemClick(movie));
         }
     }

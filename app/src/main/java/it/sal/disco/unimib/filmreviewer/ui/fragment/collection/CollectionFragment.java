@@ -91,7 +91,7 @@ public class CollectionFragment extends Fragment {
             }else{
                 if (moviesResponse.getMoviesList() != null) {
                     moviesList.clear();
-                    for(int i=0; i<Constants.API_MAX_FOR_PAGE && i<moviesResponse.getMoviesList().size(); i++){
+                    for(int i=0; i<moviesResponse.getMoviesList().size(); i++){
                         moviesList.add(moviesResponse.getMoviesList().get(i));
                     }
                     RecyclerViewAdapter.notifyDataSetChanged();

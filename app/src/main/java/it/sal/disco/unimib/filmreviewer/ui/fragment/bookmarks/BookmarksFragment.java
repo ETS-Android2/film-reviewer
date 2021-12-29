@@ -1,17 +1,29 @@
 package it.sal.disco.unimib.filmreviewer.ui.fragment.bookmarks;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import it.sal.disco.unimib.filmreviewer.R;
+import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
 
 public class BookmarksFragment extends Fragment {
@@ -29,16 +41,7 @@ public class BookmarksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view1 = inflater.inflate(R.layout.fragment_bookmarks, container, false);
-
-        //Test offline images cache
-        String imageUri = "https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UX128_CR0,3,128,176_AL_.jpg";
-        ImageView ivBasicImage = view1.findViewById(R.id.imgv_test_bookmarks);
-        Picasso.get().load(imageUri).into(ivBasicImage);
-
-        String imageUri2 = "https://imdb-api.com/posters/original/pbHpZfjzF4hKomaSmSZWRWKhO0P.jpg";
-        ImageView ivBasicImage2 = view1.findViewById(R.id.img2);
-        Picasso.get().load(imageUri2).into(ivBasicImage2);
-
+        
         return view1;
     }
 }

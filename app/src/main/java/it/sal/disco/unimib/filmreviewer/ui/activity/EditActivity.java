@@ -25,7 +25,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Objects;
@@ -139,12 +138,7 @@ public class EditActivity extends AppCompatActivity {
         }else{
             link1poster = "";
         }
-        int[] size = Constants.imagePosterSize(6);
-        Picasso.get()
-                .load(link1poster)
-                .placeholder(R.drawable.ic_baseline_movie_filter_24)
-                .resize(size[0], size[1])
-                .into(imageMovie);
+        Constants.showImage(6, imageMovie, link1poster, imageMovie);
 
         RatingBar ratingbarMovie = findViewById(R.id.ratingBar);
         ratingbarMovie.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
