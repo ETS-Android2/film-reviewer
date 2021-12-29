@@ -182,7 +182,18 @@ public class MoviesRepository implements iMoviesRepository{
         mLiveData = new MutableLiveData<>();
         Executors.newSingleThreadExecutor().execute(() -> {
             Log.d("DEBUG", "getLocalMovies");
-            MoviesResponse movie_response= new MoviesResponse(mMoviesDao.getAll());
+            MoviesResponse movie_response = new MoviesResponse(mMoviesDao.getAll());
+            mLiveData.postValue(movie_response);
+        });
+        return mLiveData;
+    }
+
+    @Override
+    public MutableLiveData<MoviesResponse> getLocalMoviesFav() {
+        mLiveData = new MutableLiveData<>();
+        Executors.newSingleThreadExecutor().execute(() -> {
+            Log.d("DEBUG", "getLocalMoviesFav");
+            MoviesResponse movie_response = new MoviesResponse(mMoviesDao.getAllFav());
             mLiveData.postValue(movie_response);
         });
         return mLiveData;

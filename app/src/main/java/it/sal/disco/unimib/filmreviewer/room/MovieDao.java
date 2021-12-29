@@ -37,4 +37,7 @@ public interface MovieDao {
 
     @Query("SELECT * FROM movie")
     List<Movie> getAll();
+
+    @Query("SELECT * FROM movie WHERE private_fav=1")
+    List<Movie> getAllFav();
 }

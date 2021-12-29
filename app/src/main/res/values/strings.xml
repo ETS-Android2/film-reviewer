@@ -32,6 +32,7 @@
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="editing">Editing...</string>
+    <string name="list_null">Can\'t load any movie</string>
 
     <string-array name="array_discover">
         <item>MostPopularMovies</item>

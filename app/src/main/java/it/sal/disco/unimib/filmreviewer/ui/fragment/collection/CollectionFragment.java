@@ -3,19 +3,17 @@ package it.sal.disco.unimib.filmreviewer.ui.fragment.collection;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -23,12 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.sal.disco.unimib.filmreviewer.R;
-import it.sal.disco.unimib.filmreviewer.adapter.MoviesRecyclerViewAdapterAPI;
 import it.sal.disco.unimib.filmreviewer.adapter.MoviesRecyclerViewAdapterLocal;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 import it.sal.disco.unimib.filmreviewer.customObj.MoviesResponse;
 import it.sal.disco.unimib.filmreviewer.ui.activity.EditActivity;
-import it.sal.disco.unimib.filmreviewer.ui.fragment.discover.DiscoverViewModel;
 import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
 public class CollectionFragment extends Fragment {
@@ -42,7 +38,6 @@ public class CollectionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         this.moviesList = new ArrayList<>();
         mCollectionViewModel = new ViewModelProvider(requireActivity()).get(CollectionViewModel.class);
     }
@@ -85,7 +80,7 @@ public class CollectionFragment extends Fragment {
             if (moviesResponse.getMoviesList() == null) {
                 Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
-                        "Can't load movies - List null",
+                        R.string.list_null,
                         Snackbar.LENGTH_LONG)
                         .show();
             }else{
