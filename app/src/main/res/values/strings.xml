@@ -1,21 +1,20 @@
 <resources>
     <string name="app_name">FilmReviewer</string>
 
-
     <string name="collection">Collection</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="discover">Discover</string>
     <string name="search">Search</string>
 
-    <string name="sample"></string>
+    <string name="sample"> </string>
     <string name="sample2">sample</string>
-    <string name="sample_long">aaaaaaaaaaaaa   aaaaaaaa aaaaa aaaaa a a a  a a a a a aaaaaaaaaaaaaaaaaaaaa aaaaa aaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaa aaaaaa aaaaa aaaaaaaa</string>
+    <string name="sample_long">Discover Discover Discover Discover Discover Discover Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search</string>
     <string name="poster">Poster</string>
     <string name="submit">Submit</string>
     <string name="noMovies">Can\'t find any movie</string>
     <string name="Favourite">Favourite</string>
     <string name="p_review">Personal Review: </string>
-    <string name="pointers">...</string>
+    <string name="pointers">…</string>
     <string name="releaseDate">Release Date:</string>
     <string name="otherInform">Others Information: </string>
     <string name="type">Type:  </string>
@@ -31,15 +30,15 @@
     <string name="metacriticRating">Metacritic:</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
-    <string name="editing">Editing...</string>
+    <string name="editing">Editing…</string>
     <string name="list_null">Can\'t load any movie</string>
 
     <string-array name="array_discover">
-        <item>MostPopularMovies</item>
-        <item>Top250Movies</item>
-        <item>ComingSoon</item>
-        <item>InTheaters</item>
-        <item>MostPopularTVs</item>
+        <item>Most Popular Movies</item>
+        <item>Top Movies in History</item>
+        <item>Coming Soon</item>
+        <item>In Theaters</item>
+        <item>Most Popular TVs</item>
     </string-array>
 
 </resources>
