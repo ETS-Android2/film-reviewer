@@ -12,6 +12,10 @@
         android:id="@+id/deleteButton1"
         android:icon="@drawable/ic_baseline_delete_forever_24"
         android:title="@string/delete"
-        app:showAsAction = "ifRoom"
-        />
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/shareButton1"
+        android:icon="@drawable/ic_baseline_share_24"
+        android:title="@string/share"
+        app:showAsAction="ifRoom"/>
 </menu>

@@ -1,6 +1,7 @@
 package it.sal.disco.unimib.filmreviewer.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -116,6 +117,38 @@ public class EditActivity extends AppCompatActivity {
             Log.d("DEBUG", "Selected BACK");
             finish();
             //onBackPressed();
+            return true;
+        }
+        if(item.getItemId() == R.id.shareButton1){
+            Log.d("DEBUG", "Selected SHARE");
+
+            //Preparing Text to share
+            String text_to_share = "";
+            text_to_share += getString(R.string.title1)+" "+currentMovie.getTitle()+"\n";
+            text_to_share += getString(R.string.Prating)+" "+ currentMovie.getPrivate_stars() +"/5.0"+"\n";
+
+            String fav;
+            if(currentMovie.isPrivate_fav()){
+                fav = getString(R.string.yes);
+            }else{
+                fav = getString(R.string.no);
+            }
+            text_to_share += getString(R.string.Pfav)+" "+ fav +"\n";
+
+            text_to_share += getString(R.string.Pdesc)+" "+ currentMovie.getPrivate_desc() +"\n";
+
+
+            //launch intent share
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, text_to_share);
+            sendIntent.setType("text/plain");
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
+
+
+
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
