@@ -126,7 +126,6 @@ public class EditActivity extends AppCompatActivity {
             String text_to_share = "";
             text_to_share += getString(R.string.title1)+" "+currentMovie.getTitle()+"\n";
             text_to_share += getString(R.string.Prating)+" "+ currentMovie.getPrivate_stars() +"/5.0"+"\n";
-
             String fav;
             if(currentMovie.isPrivate_fav()){
                 fav = getString(R.string.yes);
@@ -134,9 +133,7 @@ public class EditActivity extends AppCompatActivity {
                 fav = getString(R.string.no);
             }
             text_to_share += getString(R.string.Pfav)+" "+ fav +"\n";
-
             text_to_share += getString(R.string.Pdesc)+" "+ currentMovie.getPrivate_desc() +"\n";
-
 
             //launch intent share
             Intent sendIntent = new Intent();
@@ -145,8 +142,6 @@ public class EditActivity extends AppCompatActivity {
             sendIntent.setType("text/plain");
             Intent shareIntent = Intent.createChooser(sendIntent, null);
             startActivity(shareIntent);
-
-
 
             finish();
             return true;
