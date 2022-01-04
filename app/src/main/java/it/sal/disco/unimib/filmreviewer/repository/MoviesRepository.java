@@ -63,7 +63,7 @@ public class MoviesRepository implements iMoviesRepository{
     public static Call<MoviesResponse> getCorrectApiService(int input, String opz_param){
         Retrofit retrofit = new Retrofit
                 .Builder()
-                .baseUrl(Constants.API_BASE_URL)
+                .baseUrl(Constants.get_apiBaseurl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService mApiService = retrofit.create(ApiService.class);
@@ -139,7 +139,7 @@ public class MoviesRepository implements iMoviesRepository{
                 //Retrofit initialization
                 Retrofit retrofit = new Retrofit
                         .Builder()
-                        .baseUrl(Constants.API_BASE_URL)
+                        .baseUrl(Constants.get_apiBaseurl())
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 ApiService mApiService = retrofit.create(ApiService.class);

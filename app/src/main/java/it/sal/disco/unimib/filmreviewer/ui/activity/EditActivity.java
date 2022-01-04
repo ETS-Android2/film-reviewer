@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 
@@ -157,7 +158,11 @@ public class EditActivity extends AppCompatActivity {
         releaseMovie.setText(currentMovie.getReleaseDate());
 
         TextView plotMovie = findViewById(R.id.moviePlot);
-        plotMovie.setText(currentMovie.getPlot());
+        if(currentMovie.getPlotLocal().isEmpty()){
+            plotMovie.setText(currentMovie.getPlot());
+        }else{
+            plotMovie.setText(currentMovie.getPlotLocal());
+        }
 
         ImageView imageMovie = findViewById(R.id.movieImage);
         String link1poster;

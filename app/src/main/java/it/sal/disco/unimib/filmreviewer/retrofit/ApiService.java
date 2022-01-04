@@ -72,6 +72,4 @@ public interface ApiService {
             @Query("apiKey") String apiKey,
             @Query("id") String id,
             @Query("options") String posters);
-
-
 }

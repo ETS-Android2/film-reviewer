@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FilmReviewer</string>
+
+    <string name="collection">Collezione</string>
+    <string name="bookmarks">Preferiti</string>
+    <string name="discover">Scopri</string>
+    <string name="search">Cerca</string>
+
+    <string name="sample"> </string>
+    <string name="sample2">sample</string>
+    <string name="sample_long">Discover Discover Discover Discover Discover Discover Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search Search</string>
+    <string name="poster">Poster</string>
+    <string name="submit">Avvia</string>
+    <string name="noMovies">Nessun film trovato</string>
+    <string name="Favourite">Preferiti</string>
+    <string name="p_review">Parere: </string>
+    <string name="pointers">…</string>
+    <string name="releaseDate">Data Rilascio:</string>
+    <string name="otherInform">Altre Informazioni: </string>
+    <string name="type">Tipo:  </string>
+    <string name="originalTitle">Titolo Originale: </string>
+    <string name="duration">Durata: </string>
+    <string name="awards">Premi: </string>
+    <string name="directors">Regista: </string>
+    <string name="genres">Genere: </string>
+    <string name="companies">Studi Coinvolti: </string>
+    <string name="countries">Nazioni: </string>
+    <string name="languages">Lingue: </string>
+    <string name="imdbrating">Valutazione Imdb:</string>
+    <string name="metacriticRating">Metacritic:</string>
+    <string name="save">Salva</string>
+    <string name="delete">Cancella</string>
+    <string name="share">Condividi</string>
+    <string name="editing">Modifica…</string>
+    <string name="list_null">Nessun film trovato</string>
+    <string name="title1">Titolo:</string>
+    <string name="Prating">Valutazione Personale:</string>
+    <string name="Pfav">Preferito:</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="Pdesc">Valutazione Personale:</string>
+
+    <string-array name="array_discover">
+        <item>Film più Popolari</item>
+        <item>Migliori film nella storia</item>
+        <item>In Arrivo</item>
+        <item>Nei Cinema</item>
+        <item>Serie tv più Popolari</item>
+    </string-array>
+
+
+</resources>

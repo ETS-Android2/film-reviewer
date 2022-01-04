@@ -8,18 +8,24 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.Locale;
+
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 
 public class Constants {
 
     //API
     //public final static String API_KEY = "k_lkvlsrmu";
-
     public final static String API_KEY = "k_613gh8jx";
     //public final static String API_KEY = "k_ay29tyqr";
-    public final static String API_BASE_URL = "https://imdb-api.com/en/API/";
+
     public final static String HEADLINES_COUNTRY = "en";
-    public final static int API_MAX_FOR_PAGE = 25;
+    public final static int API_MAX_FOR_PAGE = 35;
+
+    public static String get_apiBaseurl(){
+        String country = Locale.getDefault().getLanguage();
+        return "https://imdb-api.com/"+country+"/API/";
+    }
 
     //DB
     public final static String NEWS_DATABASE_NAME = "movies_db";
