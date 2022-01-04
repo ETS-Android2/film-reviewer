@@ -52,6 +52,7 @@ public class SearchFragment extends Fragment {
         //ProgressBar
         ProgressBar pgrbar = this_view.findViewById(R.id.search_progressBar);
         pgrbar.setVisibility(View.INVISIBLE);
+        pgrbar.bringToFront();
 
         //RecyclerView
         RecyclerView mRecyclerView = this_view.findViewById(R.id.search_recycler_view);

@@ -94,7 +94,39 @@ public class MoviesRepository implements iMoviesRepository{
                     .getMostPopularTVs(Constants.HEADLINES_COUNTRY, Constants.API_KEY);
         }
 
-        if(input == 1000){
+        if(input == 5){
+            MoviesResponseCall = mApiService
+                    .getByKeyword(
+                            Constants.HEADLINES_COUNTRY,
+                            Constants.API_KEY,
+                            "action-hero");
+        }
+
+        if(input == 6){
+            MoviesResponseCall = mApiService
+                    .getByKeyword(
+                            Constants.HEADLINES_COUNTRY,
+                            Constants.API_KEY,
+                            "horror-host");
+        }
+
+        if(input == 7){
+            MoviesResponseCall = mApiService
+                    .getByKeyword(
+                            Constants.HEADLINES_COUNTRY,
+                            Constants.API_KEY,
+                            "adventurer");
+        }
+
+        if(input == 8){
+            MoviesResponseCall = mApiService
+                    .getByKeyword(
+                            Constants.HEADLINES_COUNTRY,
+                            Constants.API_KEY,
+                            "comedy-troupe");
+        }
+
+        if(input == 9){
             MoviesResponseCall = mApiService
                     .getByKeyword(
                             Constants.HEADLINES_COUNTRY,

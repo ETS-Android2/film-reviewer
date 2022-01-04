@@ -15,8 +15,10 @@ import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 public class Constants {
 
     //API
-    //public final static String API_KEY = "k_lkvlsrmu";
-    public final static String API_KEY = "k_613gh8jx";
+    public final static String API_KEY = "k_lkvlsrmu";
+    //public final static String API_KEY = "k_613gh8jx";
+
+
     //public final static String API_KEY = "k_ay29tyqr";
 
     public final static String HEADLINES_COUNTRY = "en";

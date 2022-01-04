@@ -47,6 +47,11 @@
         <item>In Arrivo</item>
         <item>Nei Cinema</item>
         <item>Serie tv più Popolari</item>
+        <item>Film Azione di Tendenza</item>
+        <item>Film Horror di Tendenza</item>
+        <item>Film Avventura di Tendenza</item>
+        <item>Commedie di Tendenza</item>
+        <item>Film Drammatici di Tendenza</item>
     </string-array>
 
 

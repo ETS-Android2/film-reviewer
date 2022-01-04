@@ -72,6 +72,7 @@ public class DiscoverFragment extends Fragment {
         //ProgressBar
         ProgressBar pgrbar = this_view.findViewById(R.id.discover_progressBar);
         pgrbar.setVisibility(View.INVISIBLE);
+        pgrbar.bringToFront();
 
         //RecyclerView
         RecyclerView mRecyclerView = this_view.findViewById(R.id.discover_recycler_view);

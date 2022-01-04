@@ -46,6 +46,11 @@
         <item>Coming Soon</item>
         <item>In Theaters</item>
         <item>Most Popular TVs</item>
+        <item>Trending Actions</item>
+        <item>Trending Horrors</item>
+        <item>Trending Adventurers</item>
+        <item>Trending Comedy</item>
+        <item>Trending Dramas</item>
     </string-array>
 
 </resources>
