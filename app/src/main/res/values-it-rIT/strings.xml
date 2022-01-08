@@ -40,6 +40,7 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="Pdesc">Valutazione Personale:</string>
+    <string name="internet_connection">Nessuna connessione ad internet</string>
 
     <string-array name="array_discover">
         <item>Film più Popolari</item>

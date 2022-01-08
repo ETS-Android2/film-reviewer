@@ -12,7 +12,6 @@ import java.util.concurrent.Executors;
 
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 import it.sal.disco.unimib.filmreviewer.utils.Constants;
-import it.sal.disco.unimib.filmreviewer.utils.Converters;
 
 
 @Database(entities = {Movie.class}, version = 1)

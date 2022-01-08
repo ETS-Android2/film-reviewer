@@ -2,6 +2,8 @@ package it.sal.disco.unimib.filmreviewer.ui.fragment.search;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -101,10 +103,26 @@ public class SearchFragment extends Fragment {
         SearchView searchView = this_view.findViewById(R.id.search_search);
         Button searchButton = this_view.findViewById(R.id.button_search);
         searchButton.setOnClickListener(v -> {
-            pgrbar.setVisibility(View.VISIBLE);
-            String query = searchView.getQuery().toString();
-            mSearchViewModel.getMovies(99, query)
-                    .observe(getViewLifecycleOwner(), observer);
+            ConnectivityManager cm =
+                    (ConnectivityManager)getContext().getSystemService(getContext().CONNECTIVITY_SERVICE);
+
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            boolean isConnected = activeNetwork != null &&
+                    activeNetwork.isConnectedOrConnecting();
+
+            if(isConnected){
+                pgrbar.setVisibility(View.VISIBLE);
+                String query = searchView.getQuery().toString();
+                mSearchViewModel.getMovies(99, query)
+                        .observe(getViewLifecycleOwner(), observer);
+            }else{
+                Snackbar.make(
+                        requireActivity().findViewById(android.R.id.content),
+                        R.string.internet_connection,
+                        Snackbar.LENGTH_LONG)
+                        .show();
+            }
+
         });
 
         return this_view;

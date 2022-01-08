@@ -2,6 +2,8 @@ package it.sal.disco.unimib.filmreviewer.ui.fragment.discover;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -103,7 +105,7 @@ public class DiscoverFragment extends Fragment {
             if (moviesResponse.getMoviesList() == null) {
                 Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
-                        "Can't load movies - List null",
+                        R.string.list_null,
                         Snackbar.LENGTH_LONG)
                         .show();
             }else{
@@ -120,9 +122,24 @@ public class DiscoverFragment extends Fragment {
         //Button
         Button discoveryButton = this_view.findViewById(R.id.button_discover);
         discoveryButton.setOnClickListener(v -> {
-            pgrbar.setVisibility(View.VISIBLE);
-            mDiscoverViewModel.getMovies(selected_index, null)
-                    .observe(getViewLifecycleOwner(), observer);
+            ConnectivityManager cm =
+                    (ConnectivityManager)getContext().getSystemService(getContext().CONNECTIVITY_SERVICE);
+
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            boolean isConnected = activeNetwork != null &&
+                    activeNetwork.isConnectedOrConnecting();
+            if(isConnected){
+                pgrbar.setVisibility(View.VISIBLE);
+                mDiscoverViewModel.getMovies(selected_index, null)
+                        .observe(getViewLifecycleOwner(), observer);
+            }else{
+                Snackbar.make(
+                        requireActivity().findViewById(android.R.id.content),
+                        R.string.internet_connection,
+                        Snackbar.LENGTH_LONG)
+                        .show();
+            }
+
         });
 
         return this_view;

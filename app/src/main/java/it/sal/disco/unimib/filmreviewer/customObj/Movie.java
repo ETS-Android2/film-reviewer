@@ -1,18 +1,12 @@
 package it.sal.disco.unimib.filmreviewer.customObj;
 
 import androidx.annotation.NonNull;
-import androidx.room.Embedded;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
-import androidx.versionedparcelable.ParcelField;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
-
-import it.sal.disco.unimib.filmreviewer.utils.Converters;
 
 @Entity
 public class Movie {

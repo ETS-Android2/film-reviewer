@@ -39,6 +39,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="Pdesc">Personal Review:</string>
+    <string name="internet_connection">No internet connection</string>
 
     <string-array name="array_discover">
         <item>Most Popular Movies</item>

@@ -1,4 +1,4 @@
-package it.sal.disco.unimib.filmreviewer.utils;
+package it.sal.disco.unimib.filmreviewer.room;
 
 import androidx.room.ProvidedTypeConverter;
 import androidx.room.TypeConverter;
