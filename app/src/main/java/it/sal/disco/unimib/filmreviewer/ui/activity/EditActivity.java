@@ -2,8 +2,6 @@ package it.sal.disco.unimib.filmreviewer.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,14 +12,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -29,17 +26,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.concurrent.Executors;
 
 import it.sal.disco.unimib.filmreviewer.R;
 import it.sal.disco.unimib.filmreviewer.adapter.ActorsRecyclerViewAdatper;
-import it.sal.disco.unimib.filmreviewer.customObj.Actor;
 import it.sal.disco.unimib.filmreviewer.customObj.Movie;
-import it.sal.disco.unimib.filmreviewer.room.MovieDao;
-import it.sal.disco.unimib.filmreviewer.room.MoviesRoomDatabase;
 import it.sal.disco.unimib.filmreviewer.utils.Constants;
 
 public class EditActivity extends AppCompatActivity {
@@ -104,7 +95,7 @@ public class EditActivity extends AppCompatActivity {
             RatingBar ratingBarPersonal = findViewById(R.id.ratingBar);
             currentMovie.setPrivate_stars(ratingBarPersonal.getRating());
 
-            Switch switchPersonal = findViewById(R.id.switch1);
+            SwitchCompat switchPersonal = findViewById(R.id.switch1);
             currentMovie.setPrivate_fav(switchPersonal.isChecked());
 
             mEditViewModel.insertDBSpecificMovie(currentMovie);
@@ -176,14 +167,6 @@ public class EditActivity extends AppCompatActivity {
         }
         Constants.showImage(6, imageMovie, link1poster, imageMovie);
 
-        RatingBar ratingbarMovie = findViewById(R.id.ratingBar);
-        ratingbarMovie.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                Log.d("DEBUG", "Stars Changed to: "+String.valueOf(rating));
-            }
-        });
-
         TextView typeMovie = findViewById(R.id.movieType);
         typeMovie.setText(currentMovie.getType());
 
@@ -220,7 +203,9 @@ public class EditActivity extends AppCompatActivity {
             int ccc = (int) bbb;
 
             imdb_bar.setProgress(ccc);
-        }catch(Exception e){}
+        }catch(Exception e){
+            Log.d("DEBUG", e.toString());
+        }
 
         ProgressBar metacritic = findViewById(R.id.progressBarMETACRITIC);
         metacritic.setMax(100);
@@ -231,19 +216,16 @@ public class EditActivity extends AppCompatActivity {
             int ccc = (int) bbb;
 
             metacritic.setProgress(ccc);
-        }catch(Exception e){}
+        }catch(Exception e){
+            Log.d("DEBUG", e.toString());
+        }
 
         RecyclerView mRecyclerView = findViewById(R.id.recyclerViewActors);
         ActorsRecyclerViewAdatper RecyclerViewAdapter;
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, currentMovie.getActorList().size()));
-        RecyclerViewAdapter = new ActorsRecyclerViewAdatper(currentMovie.getActorList(), new ActorsRecyclerViewAdatper.OnItemClickListener() {
-            @Override
-            public void onItemClick(Actor actor) {
-                Log.d(
-                        "EditActivity",
-                        "CLICKED RecycleView element " + actor.toString());
-            }
-        });
+        RecyclerViewAdapter = new ActorsRecyclerViewAdatper(currentMovie.getActorList(), actor -> Log.d(
+                "EditActivity",
+                "CLICKED RecycleView element " + actor.toString()));
         mRecyclerView.setAdapter(RecyclerViewAdapter);
 
         EditText textPersonalRev = findViewById(R.id.TextPersonalReview);
@@ -252,7 +234,7 @@ public class EditActivity extends AppCompatActivity {
         RatingBar ratingBarPersonal = findViewById(R.id.ratingBar);
         ratingBarPersonal.setRating(currentMovie.getPrivate_stars());
 
-        Switch switchPersonal = findViewById(R.id.switch1);
+        SwitchCompat switchPersonal = findViewById(R.id.switch1);
         switchPersonal.setChecked(currentMovie.isPrivate_fav());
     }
 

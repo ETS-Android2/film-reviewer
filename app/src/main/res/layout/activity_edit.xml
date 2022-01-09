@@ -8,6 +8,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/edit_toolbar"
+        app:elevation="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -33,7 +34,6 @@
         android:id="@+id/scv432"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="5dp"
         android:contentDescription="@string/sample"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <Switch
+                    <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -94,12 +94,12 @@
                         android:layout_width="135dp"
                         android:layout_height="200dp"
                         android:layout_margin="5dp"
+                        android:contentDescription="@string/poster"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="ImageContrastCheck"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:contentDescription="TODO" />
+                        tools:srcCompat="@tools:sample/avatars" />
 
                     <TextView
                         android:id="@+id/movieRelaseDate"
@@ -190,6 +190,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
+                        android:autofillHints="@string/pointers"
                         android:ems="10"
                         android:gravity="start|top"
                         android:hint="@string/pointers"
