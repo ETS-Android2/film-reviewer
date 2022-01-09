@@ -6,8 +6,7 @@
         android:id="@+id/saveButton1"
         android:icon="@drawable/ic_baseline_save_24"
         android:title="@string/save"
-        app:showAsAction = "ifRoom"
-        />
+        app:showAsAction = "ifRoom" />
     <item
         android:id="@+id/deleteButton1"
         android:icon="@drawable/ic_baseline_delete_forever_24"

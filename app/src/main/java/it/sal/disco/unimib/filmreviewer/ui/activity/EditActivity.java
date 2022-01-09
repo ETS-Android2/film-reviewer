@@ -2,6 +2,8 @@ package it.sal.disco.unimib.filmreviewer.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,6 +59,7 @@ public class EditActivity extends AppCompatActivity {
         toolbar_mia.setTitle(R.string.editing);
         setSupportActionBar(toolbar_mia);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
 
         //ProgressBar
         View scv432 = findViewById(R.id.scv432);
@@ -105,19 +108,19 @@ public class EditActivity extends AppCompatActivity {
             currentMovie.setPrivate_fav(switchPersonal.isChecked());
 
             mEditViewModel.insertDBSpecificMovie(currentMovie);
-            finish();
+            onBackPressed();
             return true;
         }
         if(item.getItemId() == R.id.deleteButton1){
             Log.d("DEBUG", "Selected DELETE");
             mEditViewModel.deleteDBSpecificMovie(currentMovie.getId());
-            finish();
+            onBackPressed();
             return true;
         }
         if(item.getItemId() == android.R.id.home){
             Log.d("DEBUG", "Selected BACK");
-            finish();
-            //onBackPressed();
+            //finish();
+            onBackPressed();
             return true;
         }
         if(item.getItemId() == R.id.shareButton1){
@@ -144,7 +147,7 @@ public class EditActivity extends AppCompatActivity {
             Intent shareIntent = Intent.createChooser(sendIntent, null);
             startActivity(shareIntent);
 
-            finish();
+            onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -251,5 +254,13 @@ public class EditActivity extends AppCompatActivity {
 
         Switch switchPersonal = findViewById(R.id.switch1);
         switchPersonal.setChecked(currentMovie.isPrivate_fav());
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left,
+                R.anim.slide_out_right);
     }
 }

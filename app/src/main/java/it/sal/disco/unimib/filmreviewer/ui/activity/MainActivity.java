@@ -2,10 +2,13 @@ package it.sal.disco.unimib.filmreviewer.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -28,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.main_bottom_nav_view);
         NavigationUI
                 .setupWithNavController(bottomNavigView_news_act, navController_news_act);
+    }
 
+    @Override
+    protected void onPause() {
+        overridePendingTransition(R.anim.slide_in_right,
+                R.anim.slide_out_left);
+        super.onPause();
     }
 }
