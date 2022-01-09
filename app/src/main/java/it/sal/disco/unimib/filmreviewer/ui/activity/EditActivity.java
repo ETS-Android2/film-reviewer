@@ -262,5 +262,6 @@ public class EditActivity extends AppCompatActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_left,
                 R.anim.slide_out_right);
+        finish();
     }
 }

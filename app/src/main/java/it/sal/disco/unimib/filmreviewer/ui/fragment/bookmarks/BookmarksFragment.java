@@ -34,6 +34,7 @@ public class BookmarksFragment extends Fragment {
     private List<Movie> moviesList;
     private MoviesRecyclerViewAdapterLocal RecyclerViewAdapter;
     private BookmarksViewModel mBookmarksViewModel;
+    private Observer<MoviesResponse> observer;
 
     public BookmarksFragment() {
         // Required empty public constructor
@@ -77,8 +78,7 @@ public class BookmarksFragment extends Fragment {
         mRecyclerView.setAdapter(RecyclerViewAdapter);
 
         //Observer for when View model change state
-        @SuppressLint("NotifyDataSetChanged")
-        Observer<MoviesResponse> observer = moviesResponse -> {
+        observer = moviesResponse -> {
             pgrbar.setVisibility(View.INVISIBLE);
             if (moviesResponse.getMoviesList() == null) {
                 Snackbar.make(
@@ -102,5 +102,12 @@ public class BookmarksFragment extends Fragment {
                 .observe(getViewLifecycleOwner(), observer);
 
         return this_view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mBookmarksViewModel.getLocalMoviesFav()
+                .observe(getViewLifecycleOwner(), observer);
     }
 }
