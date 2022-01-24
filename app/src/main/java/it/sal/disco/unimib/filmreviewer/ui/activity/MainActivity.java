@@ -19,15 +19,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Required for navigation between fragment
-        NavHostFragment navHostFragment_news_act =
+        NavHostFragment mNavHostFragment =
                 (NavHostFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.main_fragmentContainerView);
-        NavController navController_news_act =
-                navHostFragment_news_act.getNavController();
-        BottomNavigationView bottomNavigView_news_act =
+        NavController mNavController =
+                mNavHostFragment.getNavController();
+        BottomNavigationView mainBottomNavigView =
                 findViewById(R.id.main_bottom_nav_view);
         NavigationUI
-                .setupWithNavController(bottomNavigView_news_act, navController_news_act);
+                .setupWithNavController(mainBottomNavigView, mNavController);
     }
 
     @Override

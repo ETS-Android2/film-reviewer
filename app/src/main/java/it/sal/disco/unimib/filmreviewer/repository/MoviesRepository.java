@@ -55,7 +55,7 @@ public class MoviesRepository implements iMoviesRepository{
             }
             @Override
             public void onFailure(@NonNull Call<MoviesResponse> call, @NonNull Throwable t) {
-                Log.d("DEBUG", "onFailure-getNewsOnlineInDB-"+t.toString());
+                Log.d("DEBUG", "onFailure-getMovies-onFailure"+t.toString());
             }});
         return mLiveData;
     }

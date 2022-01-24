@@ -12,9 +12,6 @@ import it.sal.disco.unimib.filmreviewer.customObj.Movie;
 
 @Dao
 public interface MovieDao {
-    //Not used
-    @Insert
-    void insertNewsList(List<Movie> newsList);
 
     @Delete
     void delete(Movie movie);
